@@ -4,6 +4,47 @@ import { Container, CircularProgress, Box, Typography, TextField, Button } from 
 
 class login extends Component {
 
+
+    constructor(props){
+    super(props) 
+    this.state={
+        email:"",
+        password:"",
+        show_progress_bar:false
+    }
+    this.handleChange=this.handleChange.bind()
+    this.login=this.login.bind()
+}
+
+handleChange=(e)=>{
+    this.setState({
+        [e.target.name]:e.target.value
+    })
+}
+
+login = ()=>{
+let valid_data=true
+this.state.email_error=null
+this.state.password_error=null
+if(this.state.email===""){
+    this.state.email_error="Required email"
+    valid_data=false
+}
+if(this.state.password===""){
+    this.state.password_error="Required password"
+    valid_data=false
+}
+this.setState({
+    update:true
+})
+
+if(valid_data){
+
+}
+
+}
+
+
     render() {
         return (
           <Container maxWidth="xs">
