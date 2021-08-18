@@ -5,6 +5,71 @@ import axios from 'axios'
 
 class register extends Component {
 
+    constructor(props){
+    super(props) 
+    this.state={
+        fullname:"",
+        email:"",
+        password:"",
+        show_progress_bar:false
+    }
+    this.handleChange=this.handleChange.bind()
+    this.register=this.register.bind()
+}
+
+handleChange=(e)=>{
+    this.setState({
+        [e.target.name]:e.target.value
+    })
+}
+
+register = ()=>{
+let valid_data=true
+this.state.fullname_error=null
+this.state.email_error=null
+this.state.password_error=null
+if(this.state.fullname===""){
+    this.state.fullname_error="Required full name"
+    valid_data=false
+}
+if(this.state.email===""){
+    this.state.email_error="Required email"
+    valid_data=false
+}
+if(this.state.password===""){
+    this.state.password_error="Required password"
+    valid_data=false
+}
+this.setState({
+    update:true
+})
+
+if(valid_data){
+this.state.show_progress_bar=true
+const data ={
+            fullname: this.state.fullname,
+            email: this.state.email,
+            password: this.state.password
+        }
+        axios.post("http://localhost:90/user/register", data)
+         .then((response)=>{
+             if(response.data.success===true){
+                 this.setState({
+        show_progress_bar:false
+    })
+    console.log("Successfully Register")
+             }
+         }).catch((err)=>{
+             this.setState({
+        show_progress_bar:false,
+        email_error:"Error in registration"
+    })
+    console.log("Something went wrong!")
+    this.state.email_error="Something went wrong"
+         })
+}
+
+}
     render() {
         return (
           <Container maxWidth="xs">
