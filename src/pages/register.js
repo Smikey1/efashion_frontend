@@ -3,7 +3,7 @@ import logo from "../media/logo.png"
 import { Container, CircularProgress, Box, Typography, TextField, Button } from '@material-ui/core'
 import axios from 'axios'
 
-class register extends Component {
+class Register extends Component {
 
     constructor(props){
     super(props) 
@@ -138,4 +138,4 @@ const data ={
   }
 }
 
-export default register
+export default Register
