@@ -1,8 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
-import {BrowserRouter,Redirect,Route,Switch} from 'react-router-dom'
+import {Route,Switch} from 'react-router-dom'
 import login from './pages/login';
 import register from './pages/register';
+import Dashboard from './pages/Dashboard';
 
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
       
      <Switch>
        <Route exact path="/">
-         Dashboard page
+         <Dashboard></Dashboard>
        </Route> 
        <Route exact path="/login" component={login}/>
        <Route exact path="/register" component={register}/>
