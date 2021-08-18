@@ -3,9 +3,7 @@ import logo from "../media/logo.png"
 import { Container, CircularProgress, Box, Typography, TextField, Button } from '@material-ui/core'
 import axios from 'axios'
 
-class login extends Component {
-
-
+class Login extends Component {
     constructor(props){
     super(props) 
     this.state={
@@ -52,7 +50,9 @@ const data ={
         show_progress_bar:false
     })
     let token= response.data.accessToken
+    this.props.history.replace("/")
     console.log("Successfully login")
+    this.props.history.replace("/")
     console.log("Your token is: "+token)
              }
          }).catch((err)=>{
@@ -123,4 +123,4 @@ const data ={
   }
 }
 
-export default login
+export default Login
