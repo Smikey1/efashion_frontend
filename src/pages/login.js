@@ -4,7 +4,6 @@ import { Container, CircularProgress, Box, Typography, TextField, Button } from 
 import axios from 'axios'
 
 class Login extends Component {
-
     constructor(props){
     super(props) 
     this.state={
@@ -51,6 +50,7 @@ const data ={
         show_progress_bar:false
     })
     let token= response.data.accessToken
+    this.props.history.replace("/")
     console.log("Successfully login")
     this.props.history.replace("/")
     console.log("Your token is: "+token)
