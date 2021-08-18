@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter,Redirect,Route,Switch} from 'react-router-dom'
 import login from './pages/login';
+import register from './pages/register';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
          Dashboard page
        </Route> 
        <Route exact path="/login" component={login}/>
+       <Route exact path="/register" component={register}/>
        <Route path="*" render={()=>"404 Not found!! "}/>
      </Switch>
       
