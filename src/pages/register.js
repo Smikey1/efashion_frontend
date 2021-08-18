@@ -3,16 +3,18 @@ import logo from "../media/logo.png"
 import { Container, CircularProgress, Box, Typography, TextField, Button } from '@material-ui/core'
 import axios from 'axios'
 
-class Login extends Component {
+class Register extends Component {
+
     constructor(props){
     super(props) 
     this.state={
+        fullname:"",
         email:"",
         password:"",
         show_progress_bar:false
     }
     this.handleChange=this.handleChange.bind()
-    this.login=this.login.bind()
+    this.register=this.register.bind()
 }
 
 handleChange=(e)=>{
@@ -21,10 +23,15 @@ handleChange=(e)=>{
     })
 }
 
-login = ()=>{
+register = ()=>{
 let valid_data=true
+this.state.fullname_error=null
 this.state.email_error=null
 this.state.password_error=null
+if(this.state.fullname===""){
+    this.state.fullname_error="Required full name"
+    valid_data=false
+}
 if(this.state.email===""){
     this.state.email_error="Required email"
     valid_data=false
@@ -40,30 +47,25 @@ this.setState({
 if(valid_data){
 this.state.show_progress_bar=true
 const data ={
+            fullname: this.state.fullname,
             email: this.state.email,
             password: this.state.password
         }
-        axios.post("http://localhost:90/user/login", data)
+        axios.post("http://localhost:90/user/register", data)
          .then((response)=>{
              if(response.data.success===true){
                  this.setState({
         show_progress_bar:false
     })
-    let token= response.data.accessToken
-    this.props.history.replace("/")
-    console.log("Successfully login")
-    this.props.history.replace("/")
-    console.log("Your token is: "+token)
+    console.log("Successfully Register")
              }
          }).catch((err)=>{
              this.setState({
         show_progress_bar:false,
-        email_error:"Invalid email or password!",
-        password_error:"Invalid email or password!"
-
+        email_error:"Error in registration"
     })
-    console.log("Invalid email or password!")
-    this.state.email_error="Invalid email or password!"
+    console.log("Something went wrong!")
+    this.state.email_error="Something went wrong"
          })
 }
 
@@ -81,6 +83,19 @@ const data ={
               <img src={logo} height="50px"/>
             <Typography varient="h5" color="textSecondary">eFashion Store Admin</Typography>
          <TextField
+          label="Full Name"
+          id="outlined-size-small"
+          variant="outlined"
+          fullWidth
+          name="fullname"
+          error={this.state.fullname_error!=null}
+          helperText={this.state.fullname_error}
+          onChange={this.handleChange}
+          margin="normal" 
+          color="seconda ry"
+          size="small"
+        />
+        <TextField
           label="Email"
           id="outlined-size-small"
           type="Email"
@@ -114,8 +129,8 @@ const data ={
         <CircularProgress color="primary" size={29}/>:null}
         <br/>
         <br/>
-        <Button disableElevation variant="contained" color="primary" fullWidth onClick={this.login}>
-            Login
+        <Button disableElevation variant="contained" color="primary" fullWidth onClick={this.register}>
+            Register
         </Button>
        </Box>
           </Container>
@@ -123,4 +138,4 @@ const data ={
   }
 }
 
-export default Login
+export default Register

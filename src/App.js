@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
-import {BrowserRouter,Redirect,Route,Switch} from 'react-router-dom'
+import {Route,Switch} from 'react-router-dom'
 import Login from './pages/Login';
+import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
 
 
 function App() {
@@ -9,9 +11,10 @@ function App() {
       
      <Switch>
        <Route exact path="/">
-         Dashboard page
+         <Dashboard></Dashboard>
        </Route> 
        <Route exact path="/login" component={Login}/>
+       <Route exact path="/register" component={Register}/>
        <Route path="*" render={()=>"404 Not found!! "}/>
      </Switch>
       
