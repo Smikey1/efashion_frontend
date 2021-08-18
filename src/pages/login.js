@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import logo from "../media/logo.png"
 import { Container, CircularProgress, Box, Typography, TextField, Button } from '@material-ui/core'
+import axios from 'axios'
 
 class login extends Component {
 
@@ -39,12 +40,34 @@ this.setState({
 })
 
 if(valid_data){
+this.state.show_progress_bar=true
+const data ={
+            email: this.state.email,
+            password: this.state.password
+        }
+        axios.post("http://localhost:90/user/login", data)
+         .then((response)=>{
+             if(response.data.success===true){
+                 this.setState({
+        show_progress_bar:false
+    })
+    let token= response.data.accessToken
+    console.log("Successfully login")
+    console.log("Your token is: "+token)
+             }
+         }).catch((err)=>{
+             this.setState({
+        show_progress_bar:false,
+        email_error:"Invalid email or password!",
+        password_error:"Invalid email or password!"
 
+    })
+    console.log("Invalid email or password!")
+    this.state.email_error="Invalid email or password!"
+         })
 }
 
 }
-
-
     render() {
         return (
           <Container maxWidth="xs">
