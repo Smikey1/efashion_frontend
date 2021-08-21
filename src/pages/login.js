@@ -24,6 +24,7 @@ handleChange=(e)=>{
 
 login = async ()=>{
 let valid_data=true
+let isAdmin=false
 this.state.email_error=null
 this.state.password_error=null
 if(this.state.email===""){
@@ -45,6 +46,7 @@ const myData ={
             password: this.state.password
         }
        const response= await axios.post("http://localhost:90/user/login", myData)
+    
         if(response.data.success===true){
                  this.setState({
         show_progress_bar:false
@@ -53,7 +55,6 @@ const myData ={
     localStorage.setItem('token',token)
     this.props.history.replace("/")
     console.log("Successfully login")
-    this.props.history.replace("/")
     console.log("Your token is: "+token)
     } else {
         console.log("Invalid email or password!")
