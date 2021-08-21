@@ -5,7 +5,6 @@ import axios from 'axios'
 import { Link, NavLink } from 'react-router-dom'
 
 class Login extends Component {
-
     constructor(props){
     super(props) 
     this.state={
@@ -52,6 +51,7 @@ const myData ={
     })
     let token= response.data.accessToken
     localStorage.setItem('token',token)
+    this.props.history.replace("/")
     console.log("Successfully login")
     this.props.history.replace("/")
     console.log("Your token is: "+token)
