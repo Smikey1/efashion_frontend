@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import logo from "../media/logo.png"
 import { Container, CircularProgress, Box, Typography, TextField, Button } from '@material-ui/core'
 import axios from 'axios'
+import { Link, NavLink } from 'react-router-dom'
 
 class Login extends Component {
 
@@ -22,7 +23,7 @@ handleChange=(e)=>{
     })
 }
 
-login = ()=>{
+login = async ()=>{
 let valid_data=true
 this.state.email_error=null
 this.state.password_error=null
@@ -40,33 +41,29 @@ this.setState({
 
 if(valid_data){
 this.state.show_progress_bar=true
-const data ={
+const myData ={
             email: this.state.email,
             password: this.state.password
         }
-        axios.post("http://localhost:90/user/login", data)
-         .then((response)=>{
-             if(response.data.success===true){
+       const response= await axios.post("http://localhost:90/user/login", myData)
+        if(response.data.success===true){
                  this.setState({
         show_progress_bar:false
     })
     let token= response.data.accessToken
+    localStorage.setItem('token',token)
     console.log("Successfully login")
     this.props.history.replace("/")
     console.log("Your token is: "+token)
-             }
-         }).catch((err)=>{
-             this.setState({
+    } else {
+        console.log("Invalid email or password!")
+        this.setState({
         show_progress_bar:false,
         email_error:"Invalid email or password!",
-        password_error:"Invalid email or password!"
-
-    })
-    console.log("Invalid email or password!")
-    this.state.email_error="Invalid email or password!"
-         })
+        password_error:"Invalid email or password!" })
+        }
 }
-
+             
 }
     render() {
         return (
@@ -117,6 +114,7 @@ const data ={
         <Button disableElevation variant="contained" color="primary" fullWidth onClick={this.login}>
             Login
         </Button>
+        <p>Don't have an account? <NavLink to='/register'>Register</NavLink></p>
        </Box>
           </Container>
      )

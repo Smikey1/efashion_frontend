@@ -3,7 +3,7 @@ import './App.css';
 import {Route,Switch} from 'react-router-dom'
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
+import Admin from './pages/Admin';
 
 
 function App() {
@@ -11,8 +11,9 @@ function App() {
       
      <Switch>
        <Route exact path="/">
-         <Dashboard></Dashboard>
+         <Login></Login>
        </Route> 
+       <Route exact path="/admin" component={Admin}/>
        <Route exact path="/login" component={Login}/>
        <Route exact path="/register" component={Register}/>
        <Route path="*" render={()=>"404 Not found!! "}/>
