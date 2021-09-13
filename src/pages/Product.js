@@ -37,7 +37,7 @@ class Product extends Component {
         console.log(token)
         console.log(productId)
         console.log("http://localhost:90/cart/insert/" + productId)
-        axios.post("http://localhost:90/cart/insert/" + productId, { productId }, {
+        axios.post("http://localhost:90/cart/insert/" + productId, {productId},{
             headers: {
                 'authorization': "Bearer " + token,
                 'Accept': 'application/json',
@@ -168,16 +168,11 @@ class Product extends Component {
                 </div>
                 <div className="occasion-cart">
                   <div className="chr single-item single_page_b">
-                    <form >
-                      <input type="hidden" name="cmd" defaultValue="_cart" />
-                      <input type="hidden" name="add" defaultValue={1} />
-                      <input type="hidden" name="hub_item" defaultValue="Floral Print Women's Top" />
-                      <input type="hidden" name="amount" defaultValue={18.00} />
-                      <button type="submit" className="hub-cart phub-cart btn">
+                    
+                      <button type="submit" className="hub-cart phub-cart btn" onClick={()=>this.addToCart(this.state.id)}>
                         <i className="fa fa-cart-plus" aria-hidden="true" />
                       </button>
-                      <a href="#" data-toggle="modal" data-target="#myModal1" />
-                    </form>
+                                    
                   </div>
                 </div>
               </div>
@@ -217,16 +212,9 @@ class Product extends Component {
                       </div>
                       {/* card footer */}
                       <div className="card-footer d-flex justify-content-end">
-                        <form action="#" method="post">
-                          <input type="hidden" name="cmd" defaultValue="_cart" />
-                          <input type="hidden" name="add" defaultValue={1} />
-                          <input type="hidden" name="hub_item" defaultValue="Solid Formal Black Shirt" />
-                          <input type="hidden" name="amount" defaultValue={40.00} />
-                          <button type="submit" className="hub-cart phub-cart btn" onClick={()=>this.addToCart(product._id)}>
+                          <button type="submit" className="hub-cart phub-cart btn" onClick={()=>this.addToCart(product._id)} >
                             <i className="fa fa-cart-plus" aria-hidden="true" />
-                          </button>
-                          <a href="#" data-toggle="modal" data-target="#myModal1" />
-                        </form>
+                          </button>                      
                       </div>
                     </div>
                   </div>
@@ -235,7 +223,7 @@ class Product extends Component {
           })
         }
                   </div>
-                  {/* //card group */}
+                  {/* //card group */}    
               {/*//new_arrivals*/}
             </div>
           </div>
