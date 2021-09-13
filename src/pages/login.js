@@ -53,7 +53,7 @@ const myData ={
     })
     let token= response.data.accessToken
     localStorage.setItem('token',token)
-    this.props.history.replace("/")
+    this.props.history.replace("/admin")
     console.log("Successfully login")
     console.log("Your token is: "+token)
     } else {
