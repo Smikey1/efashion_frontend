@@ -1,25 +1,29 @@
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { Component } from 'react'
-import { Avatar, Box, Container, Typography } from '@material-ui/core';
-import BannerSlider from '../components/BannerSlider';
-import ProductView from '../components/ProductView';
-import { Category, Store } from '@material-ui/icons';
-import HorizontalScroller from '../components/HorizontalScroller';
-import GridView from '../components/GridView';
+import Tabs from '@material-ui/core/Tabs';
+import { Add, Store,Close } from '@material-ui/icons';
 import axios from "axios";
-import { Redirect } from "react-router";
-import { NavLink } from "react-router-dom";
+import React, { Component } from 'react';
+import BannerSlider from '../components/BannerSlider';
+import GridView from '../components/GridView';
+import HorizontalScroller from '../components/HorizontalScroller';
 
- class HomeFragment extends Component {
+import {
+  AppBar, Toolbar,Fab,Dialog,Slide,Button,IconButton ,
+  Avatar, Box, Container, Typography,
+} from "@material-ui/core";
 
-   state = {
-     value: 0,
-     myCategory: [],
-     myProduct:[]
-   }
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+class HomeFragment extends Component {
+
+  state = {
+    value: 0,
+    myCategory: [],
+    myProduct: [],
+    addDialog:false
+  }
 
   componentDidMount() {
     axios.get("http://localhost:90/category/get")
@@ -67,23 +71,61 @@ import { NavLink } from "react-router-dom";
             aria-label="scrollable auto tabs example"
           >
 
-            { 
-          this.state.myCategory.map(category =>{
-            return (
-              <Tab icon={ <CatagoryTab 
-                icon={category.categoryImageUrl}
-                title={category.categoryName} />} />
-            )
-        })
-      }
-        
-        </Tabs>
+            {
+              this.state.myCategory.map(category => {
+                return (
+                  <Tab icon={<CatagoryTab
+                    icon={category.categoryImageUrl}
+                    title={category.categoryName} />} />
+                )
+              })
+            }
+
+          </Tabs>
         </AppBar>
         <BannerSlider Images={[{ image: "https://images.unsplash.com/photo-1612151855475-877969f4a6cc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGQlMjBpbWFnZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80" }]}></BannerSlider>
         <HorizontalScroller />
         <GridView />
 
+        <Fab color="primary" aria-label="add" 
+        onClick ={e=>this.setState({addDialog:true})}
+        style = {{position:"fixed",bottom:"50px",right:"50px"}}>
+          <Add />
+        </Fab>
+        <Dialog
+          fullScreen
+          open={this.state.addDialog}
+          onClose={e=>this.setState({
+            addDialog:false
+          })}
+          TransitionComponent={Transition}
+        >
+          <AppBar sx={{ position: 'relative' }}>
+            <Toolbar>
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={e=>this.setState({
+                  addDialog:false
+                })}
+                aria-label="close"
+              >
+                <Close />
+              </IconButton>
+              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                Add New Product
+              </Typography>
+              <Button autoFocus color="inherit" 
+              style={{position:"absolute",right:"0px"}}
+              onClick={e=>this.setState({addDialog:false})}>
+                Save
+              </Button>
+            </Toolbar>
+          </AppBar>
+          
+        </Dialog>
       </Container>
+      // circular progress indicator
     );
   }
 }
