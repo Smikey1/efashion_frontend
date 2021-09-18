@@ -1,24 +1,52 @@
+import React, { Component } from 'react'
 import { Box, Typography } from '@material-ui/core'
-import React from 'react'
 import ProductView from './ProductView'
+import axios from "axios";
 
-const GridView = () => {
-    return (
-        <Box width="400px" p="15px" bgcolor="white" mx="auto">
-            <Typography variant="h5">Title</Typography>
-            <Box display="flex" p="15px" justifyContent="center">
-                <ProductView />
-                <ProductView />
-            </Box>
+class GridView extends Component {
+    state = {
+        myProduct: []
+    }
 
-            <Box display="flex" p="15px" justifyContent="center">
-                <ProductView />
-                <ProductView />
+    componentDidMount() {
+        axios.get("http://localhost:90/product/get")
+            .then((res) => {
+                this.setState({
+                    myProduct: res.data.data
+                })
+                console.log(res.data)
+            })
+    }
+
+    render() {
+        return (
+            <Box bgcolor="white" my="10px" p="8px">
+                <Typography variant="h5">Trending Items</Typography>
+
+                {
+                    this.state.myProduct.map(product => {
+                        return (
+                            <Box display="flex" p="15px" justifyContent="center">
+                                <ProductView
+                                    productImage={product.productImageUrlList[0]}
+                                    productName={product.productName}
+                                    productPrice={product.productPrice}
+                                    productShortDescription={product.productShortDescription}
+                                />
+                                <ProductView
+                                    productImage={product.productImageUrlList[0]}
+                                    productName={product.productName}
+                                    productPrice={product.productPrice}
+                                    productShortDescription={product.productShortDescription}
+                                />
+                            </Box>
+                        )
+                    })
+                }
+
             </Box>
-            
-            
-        </Box>
-    )
+        )
+    }
 }
 
 export default GridView
