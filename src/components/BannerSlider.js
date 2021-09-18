@@ -10,9 +10,9 @@ import { autoPlay } from 'react-swipeable-views-utils';
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const BannerSlider = (props) => {
-    const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = this.props.Images.length;
+  const theme = useTheme();
+  const maxSteps = props.Images.length;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -26,7 +26,7 @@ const BannerSlider = (props) => {
     setActiveStep(step);
   };
 
-    return (
+  return (
     <div >
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -35,9 +35,9 @@ const BannerSlider = (props) => {
         enableMouseEvents
       >
         {props.Images.map((step, index) => (
-          <div key={step.label} style={{width:"100%"}}>
+          <div key={step.label} style={{ width: "100%" }}>
             {Math.abs(activeStep - index) <= 2 ? (
-              <img style={{width:"100%"}} src={step.image} alt=" " />
+              <img style={{ width: "100%" }} src={step.image} alt=" " />
             ) : null}
           </div>
         ))}
