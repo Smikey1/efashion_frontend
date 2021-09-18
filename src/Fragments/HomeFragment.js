@@ -7,6 +7,7 @@ import { Avatar, Box, Container, Typography } from '@material-ui/core';
 import BannerSlider from '../components/BannerSlider';
 import ProductView from '../components/ProductView';
 import HorizontalScroller from '../components/HorizontalScroller';
+import GridView from '../components/GridView';
 
 export class HomeFragment extends Component {
     constructor(props){
@@ -44,6 +45,7 @@ export class HomeFragment extends Component {
       </AppBar>
             <BannerSlider Images={[{ image: "https://images.unsplash.com/photo-1612151855475-877969f4a6cc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGQlMjBpbWFnZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"}]}></BannerSlider>
             <HorizontalScroller/>
+            <GridView />
     
     
     
