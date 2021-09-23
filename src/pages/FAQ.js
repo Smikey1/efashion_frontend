@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 class FAQ extends Component {
   render() {
     return (
       <div>
+        <Header />
         {/* inner banner */}
         <div className="ibanner_w3 pt-sm-5 pt-3">
           <h4 className="head_agileinfo text-center text-capitalize text-center pt-5">
@@ -11,6 +14,7 @@ class FAQ extends Component {
             <span>S</span>ore</h4>
         </div>
         {/* //inner banner */}
+
         {/* FAQ-help-page */}
         <div className="help about faq-sec">
           <div className="container">
@@ -139,8 +143,13 @@ class FAQ extends Component {
                 </li>
               </ul>
             </div>
+
+
+
           </div>
         </div>
+
+        <Footer />
       </div>
     );
   }

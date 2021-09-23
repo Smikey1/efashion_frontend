@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 class Profile extends Component {
     constructor(props) {
@@ -200,6 +202,7 @@ class Profile extends Component {
         const userId = localStorage.getItem("userId")
         return (
             <div>
+                <Header />
                 <div className="row">
                     <div className="col-md-3 border-right">
                         <div className="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -245,6 +248,7 @@ class Profile extends Component {
                         </div>
                     </div>
                 </div>
+                <Footer />
             </div>
         )
     }

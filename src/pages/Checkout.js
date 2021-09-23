@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 class Checkout extends Component {
   state = {
@@ -99,6 +101,7 @@ class Checkout extends Component {
   render() {
     return (
       <div>
+        <Header />
         {/* inner banner */}
         <div className="ibanner_w3 pt-sm-5 pt-3">
           <h4 className="head_agileinfo text-center text-capitalize text-center pt-5">
@@ -252,6 +255,7 @@ class Checkout extends Component {
           </div>
         </section>
         {/*//checkout*/}
+        <Footer />
       </div>
     )
   }

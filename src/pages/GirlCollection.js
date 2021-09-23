@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
 import GridLeft from '../components/GridLeft'
+import Header from '../components/Header';
 
 class GirlCollection extends Component {
   render() {
     return (
       <div>
+        <Header />
         {/* inner banner */}
         <div className="ibanner_w3 pt-sm-5 pt-3">
           <h4 className="head_agileinfo text-center text-capitalize text-center pt-5">
@@ -610,6 +613,7 @@ class GirlCollection extends Component {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }

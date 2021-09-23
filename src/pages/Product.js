@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link, NavLink } from 'react-router-dom'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 class Product extends Component {
 
@@ -51,7 +53,9 @@ class Product extends Component {
 
   render() {
     return (
+
       <div>
+        <Header />
         {/* inner banner */}
         <div className="ibanner_w3 pt-sm-5 pt-3">
           <h4 className="head_agileinfo text-center text-capitalize text-center pt-5">
@@ -279,6 +283,85 @@ class Product extends Component {
             </div>
           </div>
         </div>
+
+        {/* FAQ-help-page */}
+        <div className="help about faq-sec">
+          <div className="container">
+            <h3 className="w3-head">How can we help you</h3>
+            <div className="faq-w3agile">
+              <h5>Top 5 Frequently asked questions(FAQ)</h5>
+              <ul className="faq">
+                <li className="item1">
+                  <a href="#" title="click here">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tempor vehicula ipsum nec ?</a>
+                  <ul>
+                    <li className="subitem1">
+                      <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                        ut laoreet dolore. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+                        praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi
+                        sint occaecati cupiditate non provident.</p>
+                    </li>
+                  </ul>
+                </li>
+                <li className="item2">
+                  <a href="#" title="click here">The standard Lorem Ipsum passage Etiam faucibus viverra libero vel efficitur. Ut semper nisl ut laoreet
+                    ultrices ?</a>
+                  <ul>
+                    <li className="subitem1">
+                      <p> Tincidunt ut laoreet dolore At vero eos et Lorem ipsum dolor sit amet, consectetuer adipiscing
+                        elit, sed diam nonummy nibh euismod consectetuer adipiscing elit, sed diam nonummy nibh
+                        euismod accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+                        deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate
+                        non provident.</p>
+                    </li>
+                  </ul>
+                </li>
+                <li className="item3">
+                  <a href="#" title="click here">Consectetuer adipiscing elit Etiam faucibus viverra libero vel efficitur. Ut semper nisl ut laoreet
+                    ultrices?
+                  </a>
+                  <ul>
+                    <li className="subitem1">
+                      <p>Dincidunt ut laoreet dolore At vero eos et Lorem ipsum dolor sit amet, consectetuer adipiscing
+                        elit, sed diam nonummy nibh euismod consectetuer adipiscing elit, sed diam nonummy nibh
+                        euismod accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+                        deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate
+                        non provident.</p>
+                    </li>
+                  </ul>
+                </li>
+                <li className="item4">
+                  <a href="#" title="click here">Sed diam nonummy nibh euismod Etiam faucibus viverra libero vel efficitur. Ut semper nisl ut laoreet
+                    ultrices?
+                  </a>
+                  <ul>
+                    <li className="subitem1">
+                      <p>At vero eos et Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
+                        nibh euismod consectetuer adipiscing elit, sed diam nonummy nibh euismod accusamus et
+                        iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
+                        quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
+                    </li>
+                  </ul>
+                </li>
+                <li className="item5">
+                  <a href="#" title="click here">Euismod tincidunt laoreet Etiam faucibus viverra libero vel efficitur ?</a>
+                  <ul>
+                    <li className="subitem1">
+                      <p>At vero eos et Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
+                        nibh euismod consectetuer adipiscing elit, sed diam nonummy nibh euismod accusamus et
+                        iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
+                        quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+
+
+          </div>
+        </div>
+
+        <Footer />
       </div>
     );
   }

@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
+
 
 class Girl extends Component {
   render() {
     return (
       <div>
+        <Header />
         {/* inner banner */}
         <div className="ibanner_w3 pt-sm-5 pt-3">
           <h4 className="head_agileinfo text-center text-capitalize text-center pt-5">
@@ -138,12 +142,12 @@ class Girl extends Component {
                     </form>
                   </div>
                 </div>
-                
+
               </div>
             </div>
           </div>
         </div>
-        
+
         {/* /new_arrivals */}
         <div className="section singlep_btm pb-5">
           <div className="container">
@@ -292,6 +296,7 @@ class Girl extends Component {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }

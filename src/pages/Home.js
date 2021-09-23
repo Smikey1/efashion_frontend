@@ -59,7 +59,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Header ></Header>
+        <Header />
         <UserBannerSlider></UserBannerSlider>
         <div>
           {/* Shop */}
@@ -1409,7 +1409,7 @@ class Home extends Component {
           {/* Inflate popup model here */}
           <PopUpModal></PopUpModal>
         </div>
-        <Footer></Footer>
+        <Footer />
       </div>  // end of main div
 
     );

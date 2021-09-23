@@ -38,7 +38,7 @@ class ProductCollection extends Component {
   render() {
     return (
       <div>
-        <Header ></Header>
+        <Header />
         {/* inner banner */}
         <div className="ibanner_w3 pt-sm-5 pt-3">
           <h4 className="head_agileinfo text-center text-capitalize text-center pt-5">
@@ -229,7 +229,7 @@ class ProductCollection extends Component {
             </div>
           </div>
         </div>
-        <Footer></Footer>
+        <Footer />
       </div>
     );
   }

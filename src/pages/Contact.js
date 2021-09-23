@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import Footer from '../components/Footer'
+import Header from '../components/Header'
 
 class Contact extends Component {
   render() {
     return (
       <div>
+        <Header />
         {/* inner banner */}
         <div className="ibanner_w3 pt-sm-5 pt-3">
           <h4 className="head_agileinfo text-center text-capitalize text-center pt-5">
@@ -95,6 +98,7 @@ class Contact extends Component {
           {/*//contact map grid ends here*/}
         </section>
         {/* contact */}
+        <Footer />
       </div>
     )
   }

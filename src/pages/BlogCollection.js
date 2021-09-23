@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 class BlogCollection extends Component {
   render() {
     return (
       <div>
+        <Header />
         {/* inner banner */}
         <div className="ibanner_w3 pt-sm-5 pt-3">
           <h4 className="head_agileinfo text-center text-capitalize text-center pt-5">
@@ -35,10 +38,9 @@ class BlogCollection extends Component {
                   </a>
                   <div className="card-body">
                     <h5 className="card-title blg_w3ls">
-                      <a href="single.html">Blog Title</a>
+                      <NavLink to="/blog">A Selection of T-shirts</NavLink>
                     </h5>
-                    <p className="card-text">Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Vestibulum
-                      ac diam sit amet quam vehicula elementum sed sit amet dui.</p>
+                    <p className="card-text">It’s wise to prioritize your search with a category, and we have a vibrant selection of Harley vintage t-shirts online. You can scoop up a delightful variety of thrift vintage t-shirts for youth online by keeping a close eye on our line ups.</p>
                   </div>
                 </div>
                 <div className="card">
@@ -116,25 +118,11 @@ class BlogCollection extends Component {
                     </footer>
                   </blockquote>
                 </div>
-                <div className="card">
-                  <div className="card-body">
-                    <h5 className="card-title blg_w3ls">
-                      <a href="single.html">Blog Title</a>
-                    </h5>
-                    <p className="card-text">Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Vestibulum
-                      ac diam sit amet quam vehicula elementum sed sit amet dui.</p>
-                    <p className="card-text">
-                      <small className="text-muted">Last updated 3 mins ago</small>
-                    </p>
-                  </div>
-                  <a href="single.html">
-                    <img className="card-img-top" src="images/i10.jpg" alt="Card image cap" />
-                  </a>
-                </div>
               </div>
             </div>
           </div>
         </section>
+        <Footer />
       </div>
     );
   }
