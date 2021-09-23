@@ -119,9 +119,7 @@ export default function ClippedDrawer() {
                     </List>
                     <List>
                         <ListItem button>
-                            <ListItemIcon>
-                                <Person/>
-                            </ListItemIcon>
+                            <ListItemIcon><Person/></ListItemIcon>
                             <ListItemText primary="My Account"/>
                         </ListItem>
                     </List>
