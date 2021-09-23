@@ -10,7 +10,7 @@ import FAQ from "./pages/FAQ";
 import Girl from "./pages/Girl";
 import GirlCollection from "./pages/GirlCollection";
 import Home from './pages/Home.js';
-import Login from './pages/Login';
+import Login from './pages/Login.js';
 import Payment from "./pages/Payment";
 import Product from "./pages/Product";
 import ProductCollection from "./pages/ProductCollection";
