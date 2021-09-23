@@ -28,7 +28,7 @@ class BlogCollection extends Component {
         <section className="blog_wthree py-5">
           <div className="container">
             <h5 className="head_agileinfo text-center text-capitalize pb-5">
-              <span>B</span>log</h5>
+              <span>B</span>log  <span>C</span>ollection</h5>
             {/* blog row */}
             <div className="row card-columns py-lg-5">
               <div className="col-md-4 p-0">

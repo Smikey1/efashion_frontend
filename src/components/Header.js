@@ -1,7 +1,43 @@
+import axios from 'axios'
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 class Header extends Component {
+  state = {
+    teams: [],
+    selectedTeam: "",
+    selectedItemId: "",
+    product: {}
+  };
+
+  componentDidMount() {
+
+  }
+  selectChangeHandler = (e) => {
+    const productName = e.target.value
+    this.setState({ selectedTeam: e.target.value })
+    axios.get("http://localhost:90/product/fetch/" + productName)
+      .then(res => {
+        const id = res.data.productId
+        this.setState({ selectedItemId: id })
+
+        // props.history.replace("/product/" + productId)
+      })
+      .catch()
+  }
+  // fetchProduct = (e) => {
+  //   e.preventDefault()
+  //   axios.get("http://localhost:90/product/fetch/" + this.state.selectedTeam)
+  //     .then(res => {
+  //       const productId = res.data.productId
+
+  //       props.history.replace("/product/" + productId)
+  //     })
+  //     .catch()
+
+  // }
+
+
   render() {
     const token = localStorage.getItem("token")
     if (token) {
@@ -19,9 +55,22 @@ class Header extends Component {
                 {/* //logo */}
                 <div className="w3ls_right_nav ml-auto d-flex">
                   {/* search form */}
-                  <form className="nav-search form-inline my-0 form-control" action="#" method="post">
-                    <select className="form-control input-lg" name="category">
+                  <form className="nav-search form-inline my-0 form-control" >
+
+                    <select className="form-control input-lg" name="category"
+                      value={this.state.selectedTeam}
+                      onChange={(e) => this.selectChangeHandler(e)}>
+                      {this.state.teams.map((team) => <option key={team.value} value={team.value}>{team.display}</option>)}
+
                       <option value="all">Search our store</option>
+                      <optgroup label="Jewelry">
+                        <option value="Carcanet">Carcanet</option>
+                        <option value="Pearl">Pearl</option>
+                        <option value="Bangle">Bangle</option>
+                        <option value="Necklace">Necklace</option>
+                        <option value="Panas">Panas</option>
+                        <option value="Laida">Laida</option>
+                      </optgroup>
                       <optgroup label="Mens">
                         <option value="T-Shirts">T-Shirts</option>
                         <option value="coats-jackets">Coats &amp; Jackets</option>
@@ -53,7 +102,7 @@ class Header extends Component {
                         <option value="Sweat Shirts">Sweat Shirts</option>
                       </optgroup>
                     </select>
-                    <input className="btn btn-outline-secondary  ml-3 my-sm-0" type="submit" defaultValue="Search" />
+                    <NavLink to={"/product/" + this.state.selectedItemId}><button className="btn btn-outline-secondary  ml-3 my-sm-0" type="submit">Search</button></NavLink>
                   </form>
                   {/* search form */}
                   <div className="nav-icon d-flex">
@@ -178,19 +227,19 @@ class Header extends Component {
                             </div>
                             <div className="col-md-3">
                               <span>Girl's Clothing</span>
-                              <Link className="dropdown-item" to="/productCollection">T-shirts</Link>
-                              <Link className="dropdown-item" to="/productCollection">Dresses</Link>
-                              <Link className="dropdown-item" to="/productCollection">Tunics</Link>
-                              <Link className="dropdown-item" to="/productCollection">Skirts</Link>
-                              <Link className="dropdown-item" to="/productCollection">Jeans</Link>
-                              <Link className="dropdown-item" to="/productCollection">Midi</Link>
+                              <Link className="dropdown-item" to="/girlCollection">T-shirts</Link>
+                              <Link className="dropdown-item" to="/girlCollection">Dresses</Link>
+                              <Link className="dropdown-item" to="/girlCollection">Tunics</Link>
+                              <Link className="dropdown-item" to="/girlCollection">Skirts</Link>
+                              <Link className="dropdown-item" to="/girlCollection">Jeans</Link>
+                              <Link className="dropdown-item" to="/girlCollection">Midi</Link>
                             </div>
                             <div className="col-md-3">
-                              <Link className="dropdown-item  mt-4" to="/productCollection">Tunics</Link>
-                              <Link className="dropdown-item" to="/productCollection">Skirts</Link>
-                              <Link className="dropdown-item" to="/productCollection">T-shirts</Link>
-                              <Link className="dropdown-item" to="/productCollection">Dresses</Link>
-                              <Link className="dropdown-item" to="/productCollection">Jeans</Link>
+                              <Link className="dropdown-item  mt-4" to="/girlCollection">Tunics</Link>
+                              <Link className="dropdown-item" to="/girlCollection">Skirts</Link>
+                              <Link className="dropdown-item" to="/girlCollection">T-shirts</Link>
+                              <Link className="dropdown-item" to="/girlCollection">Dresses</Link>
+                              <Link className="dropdown-item" to="/girlCollection">Jeans</Link>
                             </div>
                           </div>
                         </div>
@@ -274,10 +323,11 @@ class Header extends Component {
                       <option value="Sweat Shirts">Sweat Shirts</option>
                     </optgroup>
                   </select>
-                  <input className="btn btn-outline-secondary  ml-3 my-sm-0" type="submit" defaultValue="Search" />
+                  <button className="btn btn-outline-secondary  ml-3 my-sm-0" type="submit"  >Search</button>
                 </form>
                 {/* search form */}
                 <div className="nav-icon d-flex">
+
                   {/* sigin and sign up */}
                   <Link className="text-dark login_btn align-self-center mx-3" to="#myModal_btn" data-toggle="modal" data-target="#myModal_btn">
                     <i className="far fa-user" />
@@ -293,6 +343,7 @@ class Header extends Component {
                   </div>
                   {/* //shopping cart ends here */}
                 </div>
+
               </div>
             </nav>
             {/* //top nav */}

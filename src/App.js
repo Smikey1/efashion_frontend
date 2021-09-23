@@ -1,5 +1,3 @@
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import './App.css';
 import About from "./pages/About";
@@ -9,8 +7,6 @@ import BlogCollection from "./pages/BlogCollection";
 import Checkout from "./pages/Checkout";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
-import Girl from "./pages/Girl";
-import GirlCollection from "./pages/GirlCollection";
 import Home from './pages/Home.js';
 import Login from './pages/Login.js';
 import Payment from "./pages/Payment";
@@ -44,10 +40,8 @@ function App() {
           <Route path="/contact" component={Contact} />
           <Route path="/faq" component={FAQ} />
           <Route path="/payment" component={Payment} />
-          <Route path="/girlCollection" component={GirlCollection} />
           <Route path="/productCollection/womenCollection/:categoryName" component={WomenCollection} />
           <Route path="/productCollection" component={ProductCollection} />
-          <Route path="/girl" component={Girl} />
           <Route path="/product/:id" component={Product} />
         </Switch>
 
