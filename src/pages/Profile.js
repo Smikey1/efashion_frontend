@@ -206,7 +206,7 @@ class Profile extends Component {
                             <img className="rounded-circle mt-5" width="150px" src={this.state.profilePicUrl} />
                             <span className="font-weight-bold">{this.state.fullname}</span>
                             <span className="text-black-50">{this.state.email}</span><span> </span>
-                            <span className="text-black-50">customer</span><span>
+                            <span className="text-black-50">{this.state.role}</span><span>
                                 <input type="file" name="files" onChange={this.changeFileHandler} /></span></div>
                     </div>
                     <div className="col-md-5 border-right">

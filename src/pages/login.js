@@ -53,8 +53,8 @@ class Login extends Component {
                 })
                 let token = response.data.accessToken
                 localStorage.setItem('token', token)
-                if (response.data.role == "Admin") {
-                    this.props.history.replace("/admin")
+                if (response.data.data.role == "Admin") {
+                    this.props.history.push("/admin")
                 }
                 else {
                     this.props.history.push('/')

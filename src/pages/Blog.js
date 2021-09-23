@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import BlogRightComponent from '../components/BlogRightComponent';
+import ContactForm from '../components/ContactForm';
 
 class Blog extends Component {
   render() {
@@ -33,11 +35,16 @@ class Blog extends Component {
                 <div className="col-md-7 single-left">
                   <div className="card">
                     <div className="card-body">
-                      <h5 className="card-title font-weight-bold">Blog Title</h5>
-                      <p className="card-text">Quisque velit nisi, pretium ut lacinia in, elementum id enim. Vivamus suscipit tortor eget
-                        felis porttitor volutpat. Proin eget tortor risus. Curabitur non nulla sit amet nisl
-                        tempus convallis quis ac lectus. Praesent sapien massa, convallis a pellentesque nec,
-                        egestas non nisi. Vivamus suscipit tortor eget felis porttitor volutpat..</p>
+                      <h5 className="card-title font-weight-bold">A Selection of T-shirts</h5>
+                      <p className="card-text">
+                        It’s wise to prioritize your search with a category, and we have a vibrant selection of Harley vintage t-shirts online. You can scoop up a delightful variety of thrift vintage t-shirts for youth online by keeping a close eye on our line ups.
+
+                        Prioritizing your search with a t-shirt category will help you create a compelling collection of hard-to-find vintage t-shirts. We can help you scoop up some of the most fabulous and iconic vintage Harley tees online, the perfect present for biker and Harley lovers!
+
+                        Knitwear & Cozy Outerwear
+                        Knitwear is another selection where you can make the most of your love for vintage fashion. We have a delightfully functional roundup of used vintage men’s sweaters online. You can create a stellar wardrobe of timeless and intensely comfortable knitwear and outerwear staple to beat the cold in style.
+
+                        Our lineup of gently used vintage women hoodies will make you the envy of all every time you step outside flaunting our vintage treasures. You can also scoop up a voguishly chic variety of thrift sweatshirts online to style up your vintage knitwear and outwear with fabulous combinations!</p>
                       <p className="card-text">
                         <small className="text-muted">Last updated 3 mins ago</small>
                       </p>
@@ -80,48 +87,22 @@ class Blog extends Component {
                       </div>
                     </div>
                   </div>
+
                   <div className="all-comments p-sm-5 p-3 mt-5">
-                    <div className="wthree-form-left">
-                      {/* contact form grid */}
-                      <div className="contact-top1">
-                        <h5 className="text-dark mb-4 text-capitalize">send us a note</h5>
-                        <form action="#" method="get" className="f-color">
-                          <div className="form-group">
-                            <label htmlFor="contactusername">Name</label>
-                            <input type="text" className="form-control" id="contactusername" required />
-                          </div>
-                          <div className="form-group">
-                            <label htmlFor="contactemail">Email</label>
-                            <input type="email" className="form-control" id="contactemail" required />
-                          </div>
-                          <div className="form-group">
-                            <label htmlFor="contactcomment">Your Message</label>
-                            <textarea className="form-control" rows={5} id="contactcomment" required defaultValue={""} />
-                          </div>
-                          <button type="submit" className="btn btn-info btn-block">Submit</button>
-                        </form>
-                      </div>
-                      {/*  //contact form grid ends here */}
-                    </div>
-                    <div className="media py-5">
+
+                    <ContactForm></ContactForm>
+
+
+                    <div className="media py-3">
                       <img className="mr-3" src="images/m.png" alt="Generic placeholder image" />
                       <div className="media-body">
                         <h5 className="mt-0">Michael</h5>
                         <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in
                           vulputate at, tempus viverra turpis.</p>
-                        <div className="media mt-5">
-                          <a className="pr-3" href="#">
-                            <img src="images/f.png" alt="Generic placeholder image" />
-                          </a>
-                          <div className="media-body">
-                            <h5 className="mt-0">James</h5>
-                            <p> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                              vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
-                              fringilla. Donec lacinia congue felis in faucibus.</p>
-                          </div>
-                        </div>
                       </div>
+
                     </div>
+
                     <div className="media">
                       <img className="mr-3" src="images/m.png" alt="Generic placeholder image" />
                       <div className="media-body">
@@ -130,82 +111,12 @@ class Blog extends Component {
                           vulputate at, tempus viverra turpis.</p>
                       </div>
                     </div>
+
+
                   </div>
                 </div>
-                <div className="col-md-4">
-                  {/* Search Widget */}
-                  <div className="card mb-4">
-                    <h5 className="card-header">Search</h5>
-                    <div className="card-body">
-                      <div className="input-group">
-                        <input type="text" className="form-control" placeholder="Search for..." />
-                        <span className="input-group-btn">
-                          <button className="btn btn-secondary" type="button">Go!</button>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  {/* Categories Widget */}
-                  <div className="card my-4">
-                    <h5 className="card-header">Categories</h5>
-                    <div className="card-body">
-                      <div className="row">
-                        <ul className="w3-tag2">
-                          <li>
-                            <a href="shop.html">amet</a>
-                          </li>
-                          <li>
-                            <a href="#">placerat</a>
-                          </li>
-                          <li>
-                            <a href="shop.html">Proin </a>
-                          </li>
-                          <li>
-                            <a href="#">vehicula</a>
-                          </li>
-                          <li>
-                            <a href="#">vehicula</a>
-                          </li>
-                          <li>
-                            <a href="shop.html">diam</a>
-                          </li>
-                          <li>
-                            <a href="shop.html">amet</a>
-                          </li>
-                          <li>
-                            <a href="#">placerat</a>
-                          </li>
-                          <li>
-                            <a href="shop.html">Proin </a>
-                          </li>
-                          <li>
-                            <a href="#">vehicula</a>
-                          </li>
-                          <li>
-                            <a href="#">vehicula</a>
-                          </li>
-                          <li>
-                            <a href="shop.html">velit</a>
-                          </li>
-                          <li>
-                            <a href="shop.html">felis</a>
-                          </li>
-                          <li>
-                            <a href="comedy.html">mauris</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  {/* Side Widget */}
-                  <div className="card my-4">
-                    <h5 className="card-header">Side Widget</h5>
-                    <div className="card-body">
-                      Quisque velit nisi, pretium ut lacinia in, elementum id enim. Vivamus suscipit tortor eget felis porttitor volutpat. Proin
-                      eget tortor risus.Curabitur non nulla sit.
-                    </div>
-                  </div>
-                </div>
+
+                <BlogRightComponent></BlogRightComponent>
               </div>
             </div>
           </div>

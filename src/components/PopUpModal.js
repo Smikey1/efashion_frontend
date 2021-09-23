@@ -9,8 +9,6 @@ class PopUpModal extends Component {
     this.state = {
       email: '',
       password: '',
-      isCustomer: false,
-      isAdmin: false,
     }
     this.handler = this.handler.bind(this)
     this.buttonLogin = this.buttonLogin.bind(this)
@@ -30,16 +28,17 @@ class PopUpModal extends Component {
     }
     console.log(loginData)
 
-    e.preventDefault()
     axios.post("http://localhost:90/user/login", this.state)
       .then((res) => {
-        console.log(res.data)
-        if (res.data.role == "Customer") {
-          this.props.history.push('/')
+        console.log(res.data.data.role)
+        if (res.data.data.role == "Admin") {
+          // this.props.history.replace("/admin")
+          window.location.href = "http://localhost:3000/admin"
         }
         else {
           this.props.history.push('/')
         }
+
         localStorage.setItem('token', res.data.accessToken);
         localStorage.setItem('userId', res.data.data._id);
 
@@ -47,29 +46,11 @@ class PopUpModal extends Component {
       .catch((err) => {
         console.log(err)
       })
-
-
-    login(loginData).then((res) => {
-      if (this.state.isCustomer) {
-        this.props.history.push('/userDashboard/:id')
-      } else if (this.state.isAdmin) {
-        this.props.history.push('/adminDashboard/:id')
-      }
-    })
   }
 
 
 
   render() {
-    if (this.state.isAdmin) {
-
-      return <Redirect to="/adminDashboard/:id" />;
-
-    } else if (this.state.isCustomer) {
-
-      return <Redirect to="/userDashboard/:id" />;
-
-    }
     return (
       <div>
         {/* sign up Modal */}
@@ -170,20 +151,20 @@ class PopUpModal extends Component {
   }
 }
 
-const login = (loginData) => {
-  return axios
-    .post("http://localhost:90/user/login", {
-      email: loginData.email,
-      password: loginData.password
-    })
-    .then((response) => {
-      localStorage.setItem('token', response.data.accessToken)
-      localStorage.setItem('userId', response.data.data._id)
+// const login = (loginData) => {
+//   return axios
+//     .post("http://localhost:90/user/login", {
+//       email: loginData.email,
+//       password: loginData.password
+//     })
+//     .then((response) => {
+//       localStorage.setItem('token', response.data.accessToken)
+//       localStorage.setItem('userId', response.data.data._id)
 
-      return response.data
-    })
-    .catch((error) => {
-      console.log("Invalid email or password")
-    })
-}
+//       return response.data
+//     })
+//     .catch((error) => {
+//       console.log("Invalid email or password")
+//     })
+// }
 export default PopUpModal

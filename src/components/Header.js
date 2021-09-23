@@ -87,6 +87,9 @@ class Header extends Component {
                         <span className="sr-only">(current)</span>
                       </Link>
                     </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/productCollection">Store</Link>
+                    </li>
                     <li className="nav-item dropdown has-mega-menu" style={{ position: 'static' }}>
                       <Link className="nav-link dropdown-toggle" data-toggle="dropdown" to="#" role="button" aria-haspopup="true" aria-expanded="false">Men's clothing</Link>
                       <div className="dropdown-menu" style={{ width: '100%' }}>
@@ -121,16 +124,17 @@ class Header extends Component {
                       </div>
                     </li>
                     <li className="nav-item dropdown has-mega-menu" style={{ position: 'static' }}>
-                      <Link className="nav-link dropdown-toggle" data-toggle="dropdown" to="#" role="button" aria-haspopup="true" aria-expanded="false">Women's clothing</Link>
+                      <Link className="nav-link dropdown-toggle" data-toggle="dropdown" to="#"
+                        role="button" aria-haspopup="true" aria-expanded="false">Women's clothing</Link>
                       <div className="dropdown-menu" style={{ width: '100%' }}>
                         <div className="px-0 container">
                           <div className="row">
                             <div className="col-md-4">
-                              <Link className="dropdown-item" to="/productCollection">Dresses</Link>
-                              <Link className="dropdown-item" to="/productCollection">T-shirts</Link>
-                              <Link className="dropdown-item" to="/productCollection">Skirts</Link>
-                              <Link className="dropdown-item" to="/productCollection">Jeans</Link>
-                              <Link className="dropdown-item" to="/productCollection">Tunics</Link>
+                              <Link className="dropdown-item" to="productCollection/womenCollection/Kurtha">Kurtha</Link>
+                              <Link className="dropdown-item" to="/womenCollection/Kurtha">T-shirts</Link>
+                              <Link className="dropdown-item" to="/womenCollection/Kurtha">Skirts</Link>
+                              <Link className="dropdown-item" to="/womenCollection/Kurtha">Jeans</Link>
+                              <Link className="dropdown-item" to="/womenCollection/Kurtha">Tunics</Link>
                             </div>
                             <div className="col-md-4">
                               <Link className="dropdown-item" to="/productCollection">T-shirts</Link>

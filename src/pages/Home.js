@@ -4,6 +4,8 @@ import PopUpModal from '../components/PopUpModal'
 import UserBannerSlider from '../components/UserBannerSlider'
 import { NavLink } from 'react-router-dom'
 import GridLeft from '../components/GridLeft'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 class Home extends Component {
   state = {
@@ -57,6 +59,7 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <Header ></Header>
         <UserBannerSlider></UserBannerSlider>
         <div>
           {/* Shop */}
@@ -1406,6 +1409,7 @@ class Home extends Component {
           {/* Inflate popup model here */}
           <PopUpModal></PopUpModal>
         </div>
+        <Footer></Footer>
       </div>  // end of main div
 
     );
