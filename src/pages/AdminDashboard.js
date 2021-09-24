@@ -1,29 +1,25 @@
-import React, { useState } from 'react';
-import logo from "../media/logo.png"
-import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import HomeFragment from '../Fragments/HomeFragment.js'
+import { makeStyles } from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import {
-    Public,
-    Store,
-    LocalMall,
-    Redeem,
-    ShoppingCart,
-    Favorite,
-    Person,
-    ExitToApp
+    Category, Devices, ExitToApp, Person, Public, Settings, ShoppingCart, Store
 } from '@material-ui/icons';
-import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
 import AccountFragment from '../Fragments/AccountFragment';
+import CategoryFragment from '../Fragments/CategoryFragment';
+import HomeFragment from '../Fragments/HomeFragment.js';
+import OrderFragment from '../Fragments/OrderFragment';
+import ProductFragment from '../Fragments/ProductFragment';
+import SettingFragment from '../Fragments/SettingFragment';
+import logo from "../media/logo.png";
 
 const drawerWidth = 240;
 
@@ -59,6 +55,14 @@ export default function ClippedDrawer() {
         switch (fragment) {
             case "HOME_FRAGMENT":
                 return <HomeFragment />
+            case "MANAGE_CATEGORY_FRAGMENT":
+                return <CategoryFragment />
+            case "MANAGE_PRODUCT_FRAGMENT":
+                return <ProductFragment />
+            case "MANAGE_ORDERS_FRAGMENT":
+                return <OrderFragment />
+            case "SETTING_FRAGMENT":
+                return <SettingFragment />
             case "ACCOUNT_FRAGMENT":
                 return <AccountFragment />
 
@@ -101,39 +105,40 @@ export default function ClippedDrawer() {
                             <ListItemIcon>
                                 <Store />
                             </ListItemIcon>
-                            <ListItemText primary="My Store" />
+                            <ListItemText primary="Home" />
                         </ListItem>
                     </List>
                     <List>
-                        <ListItem button>
+                        <ListItem button onClick={e => setFragment("MANAGE_CATEGORY_FRAGMENT")}>
                             <ListItemIcon>
-                                <LocalMall />
+                                <Category />
                             </ListItemIcon>
-                            <ListItemText primary="My Orders" />
+                            <ListItemText primary="Categories" />
                         </ListItem>
                     </List>
                     <List>
-                        <ListItem button>
+                        <ListItem button onClick={e => setFragment("MANAGE_PRODUCT_FRAGMENT")}>
                             <ListItemIcon>
-                                <Redeem />
+                                <Devices />
                             </ListItemIcon>
-                            <ListItemText primary="My Rewards" />
+                            <ListItemText primary="Products" />
                         </ListItem>
                     </List>
                     <List>
-                        <ListItem button>
+                        <ListItem button onClick={e => setFragment("MANAGE_ORDERS_FRAGMENT")}>
                             <ListItemIcon>
                                 <ShoppingCart />
                             </ListItemIcon>
-                            <ListItemText primary="My Cart" />
+                            <ListItemText primary="Orders" />
                         </ListItem>
                     </List>
                     <List>
-                        <ListItem button>
-                            <ListItemIcon><Favorite />
-                            </ListItemIcon>
-                            <ListItemText primary="My Wishlist" />
+
+                        <ListItem button onClick={e => setFragment("SETTING_FRAGMENT")}>
+                            <ListItemIcon><Settings /></ListItemIcon>
+                            <ListItemText primary="Setting" />
                         </ListItem>
+
                     </List>
                     <List>
 
