@@ -42,7 +42,121 @@ const tableIcons = {
 };
 
 class CategoryFragment extends Component {
-    
+    state = {
+        myCategory: [],
+        columns: [
+            { title: 'Index', field: 'index', type: 'numeric' },
+            { title: 'Category', field: 'name', editable: 'onAdd'},
+            {
+                title: 'Icon', field: 'icon',
+                editComponent: props => (
+                    <>
+                        <input
+                            accept="image/*"
+                            id="contained-button-file"
+                            value={props.value}
+                            onChange={e => {
+                                if(e.target.files && e.target.files[0]){
+                                    this.setState({
+                                        image: e.target.files[0]
+                                    })
+                                    props.onChange(e.target.value)
+                                    e.target.value=null
+                                }
+                                
+                            }}
+                            hidden
+                            name="image"
+                            type="file"
+                        />
+                        <label htmlFor="contained-button-file">
+                            {
+                                this.state.image || props.value? (
+                                    <img src={this.state.image ? rowData.imageUrl : props.value} style={{ width: 40, height: 40 }} />
+                                ):(
+                                <Button variant="contained" color="primary" component="span">
+                                    Add Image
+                                </Button>
+                                )
+                            }
+                            
+                        </label>
+                    </>
+                ),
+                 render: (rowData) => <img src={rowData.imageUrl} style={{ width: 40,height:40}} />, 
+                
+            }
+        ],
+
+        data: [
+            { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
+            
+        ]
+    }
+
+    componentDidMount() {
+        axios.get("http://localhost:90/category/get")
+            .then((res) => {
+
+                this.setState({
+                    myCategory: res.data.data,
+                    data: res.data.data
+                })
+            })
+
+    }
+
+    render() {
+        return (
+            <div>
+                <Container maxWidth="md" fixed>
+                    <MaterialTable
+                        icons={tableIcons}
+                        title="Disable Field Editable Preview"
+                        columns={this.state.columns}
+                        data={this.state.data}
+                        editable={{
+                            onRowAdd: (newData) =>
+                                new Promise((resolve)=>{
+                                    
+                                        if (newData.index && newData.categoryName && newData.categoryIcon) {
+                                            // add image
+                                        } else {
+                                            resolve()
+                                            this.setState({
+                                                image: null
+                                            })
+                                        }
+                                }),
+                            onRowUpdate: (newData, oldData) =>
+                                new Promise((resolve) => {
+                                    setTimeout(() => {
+                                        resolve();
+                                        this.setState((prevState) => {
+                                            const data = [...prevState.data];
+                                            data[data.indexOf(oldData)] = newData
+                                            return { ...prevState, data }
+                                        })
+                                    }, 600)
+                                }),
+                            onRowDelete: (oldData) =>
+                                new Promise((resolve) => {
+                                    setTimeout(() => {
+                                        resolve();
+                                        this.setState((prevState) => {
+                                            const data = [...prevState.data];
+                                            data.splice(data.indexOf(oldData), 1);
+                                            return { ...prevState, data }
+                                        })
+                                    }, 600)
+                                }),
+                        }}
+                    />
+                </Container>
+
+            </div>
+        )
+    }
 }
 
 export default CategoryFragment
