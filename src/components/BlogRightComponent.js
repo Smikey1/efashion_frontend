@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 
 class BlogRightComponent extends Component {
     render() {
@@ -24,46 +25,46 @@ class BlogRightComponent extends Component {
                         <div className="row">
                             <ul className="w3-tag2">
                                 <li>
-                                    <a href="shop.html">amet</a>
+                                    <Link to="#">amet</Link>
                                 </li>
                                 <li>
-                                    <a href="#">placerat</a>
+                                    <Link to="#">placerat</Link>
                                 </li>
                                 <li>
-                                    <a href="shop.html">Proin </a>
+                                    <Link to="#">Proin </Link>
                                 </li>
                                 <li>
-                                    <a href="#">vehicula</a>
+                                    <Link to="#">vehicula</Link>
                                 </li>
                                 <li>
-                                    <a href="#">vehicula</a>
+                                    <Link to="#">vehicula</Link>
                                 </li>
                                 <li>
-                                    <a href="shop.html">diam</a>
+                                    <Link to="#">diam</Link>
                                 </li>
                                 <li>
-                                    <a href="shop.html">amet</a>
+                                    <Link to="#">amet</Link>
                                 </li>
                                 <li>
-                                    <a href="#">placerat</a>
+                                    <Link to="#">placerat</Link>
                                 </li>
                                 <li>
-                                    <a href="shop.html">Proin </a>
+                                    <Link to="#">Proin </Link>
                                 </li>
                                 <li>
-                                    <a href="#">vehicula</a>
+                                    <Link to="#">vehicula</Link>
                                 </li>
                                 <li>
-                                    <a href="#">vehicula</a>
+                                    <Link to="#">vehicula</Link>
                                 </li>
                                 <li>
-                                    <a href="shop.html">velit</a>
+                                    <Link to="#">velit</Link>
                                 </li>
                                 <li>
-                                    <a href="shop.html">felis</a>
+                                    <Link to="#">felis</Link>
                                 </li>
                                 <li>
-                                    <a href="comedy.html">mauris</a>
+                                    <Link to="#">mauris</Link>
                                 </li>
                             </ul>
                         </div>

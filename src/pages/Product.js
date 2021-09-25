@@ -8,7 +8,7 @@ class Product extends Component {
 
   state = {
     product: {},
-    myproducts: [],
+    productList: [],
     id: this.props.match.params.id,
     productImageUrlList: []
 
@@ -17,10 +17,11 @@ class Product extends Component {
     axios.get("http://localhost:90/product/get")
       .then((res) => {
         this.setState({
-          myproducts: res.data.data
+          productList: res.data.data
         })
       })
 
+    //get product by Id
     axios.get("http://localhost:90/product/get/" + this.state.id)
       .then(res => {
         console.log(res)
@@ -34,6 +35,7 @@ class Product extends Component {
       .catch()
   }
 
+  // function to add product to cart
   addToCart = (productId) => {
     const token = localStorage.getItem("token")
     console.log(token)
@@ -105,19 +107,6 @@ class Product extends Component {
                 <div className="caption">
                   <ul className="rating-single">
                     {/* Rating Stars of product */}
-
-                    {/* {
-                      this.state.product.productRating.map((rate) => {
-                        return (
-                          <li>
-                            <Link to="#">
-                              <span className="fa fa-star yellow-star" aria-hidden="true" />
-                            </Link>
-                          </li>
-                        )
-                      })
-                    } */}
-
                     <li>
                       <Link to="#">
                         <span className="fa fa-star yellow-star" aria-hidden="true" />
@@ -183,23 +172,6 @@ class Product extends Component {
                   </form>
                 </div>
 
-                {/* Need this cart cart
-                <div className="occasion-cart">
-                  <div className="chr single-item single_page_b">
-                    <form action="#" method="post">
-                      <input type="hidden" name="cmd" defaultValue="_cart" />
-                      <input type="hidden" name="add" defaultValue={1} />
-                      <input type="hidden" name="hub_item" defaultValue=" Formal Men's Blazer" />
-                      <input type="hidden" name="amount" defaultValue="15.99" />
-                      <button type="submit" className="hub-cart phub-cart btn">
-                        <i className="fa fa-cart-plus" aria-hidden="true" />
-                      </button>
-                      <a href="#" data-toggle="modal" data-target="#myModal1" />
-                    </form>
-                  </div>
-                </div>
-                 */}
-
                 {/* working cart */}
                 <div className="occasion-cart">
                   <div className="chr single-item single_page_b">
@@ -233,7 +205,7 @@ class Product extends Component {
               {/* card group 2 */}
               <div className="card-group my-5">
                 {
-                  this.state.myproducts.slice(6, 10).map((product) => {
+                  this.state.productList.slice(5, 9).map((product) => {
                     return (
                       // {/* card */}
                       <div className="col-lg-3 col-sm-6 p-0">

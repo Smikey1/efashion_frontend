@@ -28,6 +28,7 @@ class Profile extends Component {
         this.getUserData()
     }
 
+    // function to get user profile
     getUserData = async () => {
         try {
             console.log(localStorage.getItem("token"))
@@ -37,7 +38,6 @@ class Profile extends Component {
                 }
             }
 
-            // const token = localStorage.getItem("token")
             const res = await axios.get("http://localhost:90/user/profile", con)
 
             this.setState({
@@ -59,7 +59,7 @@ class Profile extends Component {
         }
     }
 
-
+    // Creating on change handler
     userFullname = (e) => {
         this.setState({
             fullname: e.target.value
@@ -170,16 +170,14 @@ class Profile extends Component {
         if (this.state.password !== "" && this.state.password === this.state.confirmPassword) {
             this.changePassword()
         }
-        // this.props.history.push('/userDashboard/:id')
+
         console.log(res.data)
         this.getUserData()
-        // if (this.state.filename !== null) {
-        //     this.updateProfileImage()
-        // }
+
         if (this.state.password !== "" && this.state.password === this.state.confirmPassword) {
             this.changePassword()
         }
-        // this.props.history.push('/userDashboard/:id')
+
         console.log(res.data)
         this.getUserData()
     }
@@ -209,8 +207,8 @@ class Profile extends Component {
                             <img className="rounded-circle mt-5" width="150px" src={this.state.profilePicUrl} />
                             <span className="font-weight-bold">{this.state.fullname}</span>
                             <span className="text-black-50">{this.state.email}</span><span> </span>
-                            <span className="text-black-50">{this.state.role}</span><span>
-                                <input type="file" name="files" onChange={this.changeFileHandler} /></span></div>
+                            <span className="text-black-50">{this.state.role}</span>
+                            <span><input type="file" name="files" onChange={this.changeFileHandler} /></span></div>
                     </div>
                     <div className="col-md-5 border-right">
                         <div className="p-3 py-5">
@@ -236,10 +234,6 @@ class Profile extends Component {
                         </div>
                     </div>
                     <div className="col-md-4">
-
-
-
-
 
                         <div className="p-3 py-5">
                             <div className="d-flex justify-content-between align-items-center experience"><span>Edit Your Experience</span><span className="border px-3 p-1 add-experience"><i className="fa fa-plus" />&nbsp;Experience</span></div><br />

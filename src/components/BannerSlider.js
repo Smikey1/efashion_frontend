@@ -37,7 +37,7 @@ const BannerSlider = (props) => {
         {props.Images.map((step, index) => (
           <div key={step.label} style={{ width: "100%" }}>
             {Math.abs(activeStep - index) <= 2 ? (
-              <img style={{ width: "100%", height:"250px" }} src={step.image} alt=" " />
+              <img style={{ width: "100%", height: "250px" }} src={step.image} alt=" " />
             ) : null}
           </div>
         ))}
@@ -64,6 +64,7 @@ const BannerSlider = (props) => {
   );
 }
 
+// setting up for useStyle
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 400,

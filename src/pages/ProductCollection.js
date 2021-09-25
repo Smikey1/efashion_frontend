@@ -7,17 +7,18 @@ import Footer from '../components/Footer'
 
 class ProductCollection extends Component {
   state = {
-    myproducts: []
+    productList: []
   }
   componentDidMount() {
     axios.get("http://localhost:90/product/get")
       .then((res) => {
         this.setState({
-          myproducts: res.data.data
+          productList: res.data.data
         })
-        console.log(this.state.myproducts)
+        console.log(this.state.productList)
       })
   }
+  // function for add product to cart
   addToCart = (productId) => {
     const token = localStorage.getItem("token")
     console.log(token)
@@ -71,7 +72,7 @@ class ProductCollection extends Component {
                 <div className="card-group">
                   {/* card */}
                   {
-                    this.state.myproducts.slice(0, 12).map((product) => {
+                    this.state.productList.slice(0, 12).map((product) => {
                       return (
                         // {/* card */}
                         <div className="col-lg-3 col-sm-6 p-0">
@@ -125,7 +126,7 @@ class ProductCollection extends Component {
                   {/* row2 */}
 
                   {
-                    this.state.myproducts.slice(12, 24).map((product) => {
+                    this.state.productList.slice(12, 24).map((product) => {
                       return (
                         // {/* card */}
                         <div className="col-lg-3 col-sm-6 p-0">
@@ -177,7 +178,7 @@ class ProductCollection extends Component {
                 <div className="card-group">
                   {/* row1*/}
                   {
-                    this.state.myproducts.slice(24, 40).map((product) => {
+                    this.state.productList.slice(24, 40).map((product) => {
                       return (
                         // {/* card */}
                         <div className="col-lg-3 col-sm-6 p-0">

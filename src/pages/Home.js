@@ -9,15 +9,15 @@ import Footer from '../components/Footer'
 
 class Home extends Component {
   state = {
-    myproducts: []
+    productList: []
   }
   componentDidMount() {
     axios.get("http://localhost:90/product/get")
       .then((res) => {
         this.setState({
-          myproducts: res.data.data
+          productList: res.data.data
         })
-        console.log(this.state.myproducts)
+        console.log(this.state.productList)
       })
   }
   addToCart = (productId) => {
@@ -76,7 +76,7 @@ class Home extends Component {
                   {/* Main card group  */}
                   <div className="card-group">
                     {
-                      this.state.myproducts.slice(0, 8).map((product) => {
+                      this.state.productList.slice(0, 8).map((product) => {
                         return (
                           // {/* card */}
                           <div className="col-lg-3 col-sm-6 p-0">
@@ -128,7 +128,7 @@ class Home extends Component {
                     {/* card group 2 */}
                     <div className="card-group my-5">
                       {
-                        this.state.myproducts.slice(9, 17).map((product) => {
+                        this.state.productList.slice(9, 17).map((product) => {
                           return (
                             // {/* card */}
                             <div className="col-lg-3 col-sm-6 p-0">
@@ -179,7 +179,7 @@ class Home extends Component {
                     {/* card group  */}
                     <div className="card-group">
                       {
-                        this.state.myproducts.slice(22, 30).map((product) => {
+                        this.state.productList.slice(22, 30).map((product) => {
                           return (
                             // {/* card */}
                             <div className="col-lg-3 col-sm-6 p-0">

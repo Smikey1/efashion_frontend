@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Swal from "sweetalert2"
 
 class Checkout extends Component {
   state = {
@@ -12,7 +13,7 @@ class Checkout extends Component {
     phone: "",
     profilePicUrl: "",
     filename: null,
-    myproducts: [],
+    cartList: [],
     total: 0,
     index: 1
   }
@@ -70,6 +71,35 @@ class Checkout extends Component {
     })
   }
 
+  placeOrder = async (e) => {
+    e.preventDefault()
+    const token = localStorage.getItem("token")
+    const auth = {
+      headers: {
+        'authorization': "Bearer " + token,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }
+    const carts = this.state.cartList
+    const newCart = carts.map(item => {
+      return { qty: item.quantity, productId: item.productId._id }
+    })
+
+    const res = await axios.post("http://localhost:90/order/insert", { order: newCart }, auth)
+      .then(() => {
+        Swal.fire({
+          title: 'Product added to Order Successfully',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: " view added iteam"
+        })
+      })
+    console.log(res)
+  }
+
   getItems = async () => {
     this.state.index = 1
     const token = localStorage.getItem("token")
@@ -82,9 +112,9 @@ class Checkout extends Component {
     }
     const res = await axios.get("http://localhost:90/cart/get", auth)
     this.setState({
-      myproducts: res.data.data
+      cartList: res.data.data
     })
-    console.log(this.state.myproducts)
+    console.log(this.state.cartList)
   }
 
   // delete cart funtion
@@ -129,7 +159,7 @@ class Checkout extends Component {
                 <h4>review your order
                 </h4>
                 <h4 className="mt-sm-0 mt-3">Your shopping cart contains:
-                  <span>{this.state.myproducts.length} Products</span>
+                  <span>{this.state.cartList.length} Products</span>
                 </h4>
               </div>
               <div className="checkout-right">
@@ -146,19 +176,18 @@ class Checkout extends Component {
                   </thead>
                   <tbody>
                     {
-                      this.state.myproducts.map((product, idxx) => {
-                        const price = +product.productId.productPrice
+                      this.state.cartList.map((cart, idxx) => {
+                        const price = +cart.productId.productPrice
                         this.state.total += price
-                        let qty = + product.quantity
+                        let qty = + cart.quantity
                         const idx = this.state.index
                         this.state.index++
                         return (
                           <tr className={"rem" + idx}>
                             <td className="invert">{idxx + 1}</td>
                             <td className="invert-image">
-                              {/* <Link to={"http://localhost:90/product/get/" + this.product.productId}> */}
                               <Link to="#">
-                                <img src={product.productId.productImageUrlList[0]} alt=" " className="img-responsive" />
+                                <img src={cart.productId.productImageUrlList[0]} alt=" " className="img-responsive" />
                               </Link>
                             </td>
                             <td className="invert">
@@ -172,11 +201,11 @@ class Checkout extends Component {
                                 </div>
                               </div>
                             </td>
-                            <td className="invert">{product.productId.productName}</td>
-                            <td className="invert">{product.productId.productPrice}</td>
+                            <td className="invert">{cart.productId.productName}</td>
+                            <td className="invert">{cart.productId.productPrice}</td>
                             <td className="invert">
                               <div className="rem">
-                                <div className="close1" onClick={() => this.removeCart(product.productId._id)}></div>
+                                <div className="close1" onClick={() => this.removeCart(cart.productId._id)}></div>
                               </div>
                             </td>
                           </tr>
@@ -192,11 +221,11 @@ class Checkout extends Component {
                   <h4>Continue to Checkout</h4>
                   <ul>
                     {
-                      this.state.myproducts.map((product) => {
+                      this.state.cartList.map((cart) => {
                         return (
-                          <li>{product.productId.productName}
+                          <li>{cart.productId.productName}
                             <i>-</i>
-                            <span>Rs. {product.productId.productPrice}</span>
+                            <span>Rs. {cart.productId.productPrice}</span>
                           </li>
                         )
                       })}
@@ -208,7 +237,7 @@ class Checkout extends Component {
                 </div>
                 <div className="col-md-8 address_form">
                   <h4>Billing Address</h4>
-                  <form action="payment.html" method="post" className="creditly-card-form shopf-sear-headinfo_form">
+                  <form className="creditly-card-form shopf-sear-headinfo_form">
                     <div className="creditly-wrapper wrapper">
                       <div className="information-wrapper">
                         <div className="first-row form-group">
@@ -245,7 +274,7 @@ class Checkout extends Component {
                             </select>
                           </div>
                         </div>
-                        <NavLink to="/payment"><button className="submit check_out">place order</button></NavLink>
+                        <button className="submit check_out" onClick={(e) => this.placeOrder(e)}>place order</button>
                       </div>
                     </div>
                   </form>

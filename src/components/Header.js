@@ -59,7 +59,8 @@ class Header extends Component {
 
                     <select className="form-control input-lg" name="category"
                       value={this.state.selectedTeam}
-                      onChange={(e) => this.selectChangeHandler(e)}>
+                      onChange={(e) => this.selectChangeHandler(e)}
+                      >
                       {this.state.teams.map((team) => <option key={team.value} value={team.value}>{team.display}</option>)}
 
                       <option value="all">Search our store</option>

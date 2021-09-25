@@ -43,12 +43,14 @@ const tableIcons = {
 
 class CategoryFragment extends Component {
     state = {
+        image: {},
         myCategory: [],
+        data: [],
         columns: [
-            { title: 'Index', field: 'index', type: 'numeric' },
-            { title: 'Category', field: 'name', editable: 'onAdd'},
+            { title: 'Index', field: '_id', type: 'numeric' },
+            { title: 'Category', field: 'categoryName', editable: 'onAdd' },
             {
-                title: 'Icon', field: 'icon',
+                title: 'Icon', field: 'categoryImageUrl',
                 editComponent: props => (
                     <>
                         <input
@@ -56,54 +58,52 @@ class CategoryFragment extends Component {
                             id="contained-button-file"
                             value={props.value}
                             onChange={e => {
-                                if(e.target.files && e.target.files[0]){
+                                if (e.target.files && e.target.files[0]) {
                                     this.setState({
                                         image: e.target.files[0]
                                     })
                                     props.onChange(e.target.value)
-                                    e.target.value=null
+                                    e.target.value = null
                                 }
-                                
+
                             }}
                             hidden
                             name="image"
                             type="file"
                         />
                         <label htmlFor="contained-button-file">
+                            <img src={props.value} style={{ width: 40, height: 40 }} />
+
                             {
-                                this.state.image || props.value? (
-                                    <img src={this.state.image ? rowData.imageUrl : props.value} style={{ width: 40, height: 40 }} />
-                                ):(
-                                <Button variant="contained" color="primary" component="span">
-                                    Add Image
-                                </Button>
+                                this.state.image || props.value ? (
+                                    <img src={this.state.image ? props.categoryImageUrl : props.value} style={{ width: 40, height: 40 }} />
+                                ) : (
+                                    <Button variant="contained" color="primary" component="span">
+                                        Add Image
+                                    </Button>
                                 )
                             }
-                            
+
                         </label>
                     </>
                 ),
-                 render: (rowData) => <img src={rowData.imageUrl} style={{ width: 40,height:40}} />, 
-                
+                render: (rowData) => <img src={rowData.categoryImageUrl} style={{ width: 40, height: 40 }} />,
+
             }
         ],
 
-        data: [
-            { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
-            
-        ]
+
     }
 
     componentDidMount() {
         axios.get("http://localhost:90/category/get")
             .then((res) => {
-
+                console.log(res.data.data)
                 this.setState({
                     myCategory: res.data.data,
                     data: res.data.data
                 })
             })
-
     }
 
     render() {
@@ -116,18 +116,19 @@ class CategoryFragment extends Component {
                         columns={this.state.columns}
                         data={this.state.data}
                         editable={{
+
                             onRowAdd: (newData) =>
-                                new Promise((resolve)=>{
-                                    
-                                        if (newData.index && newData.categoryName && newData.categoryIcon) {
-                                            // add image
-                                        } else {
-                                            resolve()
-                                            this.setState({
-                                                image: null
-                                            })
-                                        }
+                                new Promise((resolve) => {
+                                    if (newData._id && newData.categoryName && newData.categoryIcon) {
+                                        // add image
+                                    } else {
+                                        resolve()
+                                        this.setState({
+                                            image: null
+                                        })
+                                    }
                                 }),
+
                             onRowUpdate: (newData, oldData) =>
                                 new Promise((resolve) => {
                                     setTimeout(() => {
@@ -139,6 +140,7 @@ class CategoryFragment extends Component {
                                         })
                                     }, 600)
                                 }),
+
                             onRowDelete: (oldData) =>
                                 new Promise((resolve) => {
                                     setTimeout(() => {

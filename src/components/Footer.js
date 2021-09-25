@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 
 class Footer extends Component {
-    render() {
-        return (
-            <div>
-                {/* //footer */}
-                <footer>
+  render() {
+    return (
+      <div>
+        {/* //footer */}
+        <footer>
           <div className="footerv2-w3ls">
             <div className="footer-w3lagile-innerr">
               {/* footer-top */}
@@ -16,16 +17,16 @@ class Footer extends Component {
                     <h4>Support</h4>
                     <ul>
                       <li>
-                        <a href="payment.html">Payment</a>
+                        <Link to="/payment">Payment</Link>
                       </li>
                       <li>
-                        <a href="#">Shipping</a>
+                        <Link to="#">Shipping</Link>
                       </li>
                       <li>
-                        <a href="#">Cancellation &amp; Returns</a>
+                        <Link to="#">Cancellation &amp; Returns</Link>
                       </li>
                       <li>
-                        <a href="faq.html">FAQ</a>
+                        <Link to="/faq">FAQ</Link>
                       </li>
                     </ul>
                   </div>
@@ -35,32 +36,32 @@ class Footer extends Component {
                     <h4>Latest Blog</h4>
                     <div className="footer-v2grid1 row">
                       <div className="col-4 footer-v2grid1-left">
-                        <a href="blog.html">
+                        <Link to="/blogCollection">
                           <img src="images/bl2.jpg" alt=" " className="img-fluid" />
-                        </a>
+                        </Link>
                       </div>
                       <div className="col-8 footer-v2grid1-right p-0">
-                        <a href="blog.html">eveniie arcet ut moles morbi dapiti</a>
+                        <Link to="/blogCollection">eveniie arcet ut moles morbi dapiti</Link>
                       </div>
                     </div>
                     <div className="footer-v2grid1 row my-2">
                       <div className="col-4 footer-v2grid1-left">
-                        <a href="blog.html">
+                        <Link to="/blogCollection">
                           <img src="images/bl1.jpg" alt=" " className="img-fluid" />
-                        </a>
+                        </Link>
                       </div>
                       <div className="col-8 footer-v2grid1-right p-0">
-                        <a href="blog.html">earum rerum tenmorbi dapiti et</a>
+                        <Link to="/blogCollection">earum rerum tenmorbi dapiti et</Link>
                       </div>
                     </div>
                     <div className="footer-v2grid1 row">
                       <div className="col-4 footer-v2grid1-left">
-                        <a href="blog.html">
+                        <Link to="/blogCollection">
                           <img src="images/bl3.jpg" alt=" " className="img-fluid" />
-                        </a>
+                        </Link>
                       </div>
                       <div className="col-8 footer-v2grid1-right p-0">
-                        <a href="blog.html">morbi dapiti eveniet ut molesti</a>
+                        <Link to="/blogCollection">morbi dapiti eveniet ut molesti</Link>
                       </div>
                     </div>
                   </div>
@@ -70,22 +71,22 @@ class Footer extends Component {
                     <h4>office locations</h4>
                     <ul>
                       <li>
-                        <a href="#">new jersey</a>
+                        <Link to="#">new jersey</Link>
                       </li>
                       <li>
-                        <a href="#">texas</a>
+                        <Link to="#">texas</Link>
                       </li>
                       <li>
-                        <a href="#">michigan</a>
+                        <Link to="#">michigan</Link>
                       </li>
                       <li>
-                        <a href="#">cannada</a>
+                        <Link to="#">cannada</Link>
                       </li>
                       <li>
-                        <a href="#">brazil</a>
+                        <Link to="#">brazil</Link>
                       </li>
                       <li>
-                        <a href="#">california</a>
+                        <Link to="#">california</Link>
                       </li>
                     </ul>
                   </div>
@@ -96,49 +97,49 @@ class Footer extends Component {
                       flickr posts
                     </h4>
                     <div className="footer-v2grid-instagram">
-                      <a href="#">
+                      <Link to="#">
                         <img src="images/bl4.jpg" alt=" " className="img-fluid" />
-                      </a>
+                      </Link>
                     </div>
                     <div className="footer-v2grid-instagram">
-                      <a href="#">
+                      <Link to="#">
                         <img src="images/bl1.jpg" alt=" " className="img-fluid" />
-                      </a>
+                      </Link>
                     </div>
                     <div className="footer-v2grid-instagram">
-                      <a href="#">
+                      <Link to="#">
                         <img src="images/bl6.jpg" alt=" " className="img-fluid" />
-                      </a>
+                      </Link>
                     </div>
                     <div className="footer-v2grid-instagram">
-                      <a href="#">
+                      <Link to="#">
                         <img src="images/bl5.jpg" alt=" " className="img-fluid" />
-                      </a>
+                      </Link>
                     </div>
                     <div className="footer-v2grid-instagram">
-                      <a href="#">
+                      <Link to="#">
                         <img src="images/bl2.jpg" alt=" " className="img-fluid" />
-                      </a>
+                      </Link>
                     </div>
                     <div className="footer-v2grid-instagram">
-                      <a href="#">
+                      <Link to="#">
                         <img src="images/bl3.jpg" alt=" " className="img-fluid" />
-                      </a>
+                      </Link>
                     </div>
                     <div className="footer-v2grid-instagram">
-                      <a href="#">
+                      <Link to="#">
                         <img src="images/bl6.jpg" alt=" " className="img-fluid" />
-                      </a>
+                      </Link>
                     </div>
                     <div className="footer-v2grid-instagram">
-                      <a href="#">
+                      <Link to="#">
                         <img src="images/bl4.jpg" alt=" " className="img-fluid" />
-                      </a>
+                      </Link>
                     </div>
                     <div className="footer-v2grid-instagram">
-                      <a href="#">
+                      <Link to="#">
                         <img src="images/bl5.jpg" alt=" " className="img-fluid" />
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   {/* //flickr posts */}
@@ -147,52 +148,52 @@ class Footer extends Component {
                     <h4>popular tags</h4>
                     <ul className="w3-tag2">
                       <li>
-                        <a href="shop.html">amet</a>
+                        <Link to="#">amet</Link>
                       </li>
                       <li>
-                        <a href="men.html">placerat</a>
+                        <Link to="#">placerat</Link>
                       </li>
                       <li>
-                        <a href="shop.html">Proin </a>
+                        <Link to="#">Proin </Link>
                       </li>
                       <li>
-                        <a href="boys.html">vehicula</a>
+                        <Link to="#">vehicula</Link>
                       </li>
                       <li>
-                        <a href="shop.html">diam</a>
+                        <Link to="#">diam</Link>
                       </li>
                       <li>
-                        <a href="women.html">velit</a>
+                        <Link to="#">velit</Link>
                       </li>
                       <li>
-                        <a href="shop.html">felis</a>
+                        <Link to="#">felis</Link>
                       </li>
                       <li>
-                        <a href="shop.html">mauris</a>
+                        <Link to="#">mauris</Link>
                       </li>
                       <li>
-                        <a href="girls.html">amet</a>
+                        <Link to="#">amet</Link>
                       </li>
                       <li>
-                        <a href="shop.html">placerat</a>
+                        <Link to="#">placerat</Link>
                       </li>
                       <li>
-                        <a href="shop.html">Proin </a>
+                        <Link to="#">Proin </Link>
                       </li>
                       <li>
-                        <a href="index.html">vehicula</a>
+                        <Link to="/">vehicula</Link>
                       </li>
                       <li>
-                        <a href="shop.html">diam</a>
+                        <Link to="#">diam</Link>
                       </li>
                       <li>
-                        <a href="men.html">velit</a>
+                        <Link to="#">velit</Link>
                       </li>
                       <li>
-                        <a href="shop.html">felis</a>
+                        <Link to="#">felis</Link>
                       </li>
                       <li>
-                        <a href="women.html">mauris</a>
+                        <Link to="#">mauris</Link>
                       </li>
                     </ul>
                   </div>
@@ -204,44 +205,44 @@ class Footer extends Component {
                 <div className="container">
                   <ul className="bottom-links-agile">
                     <li>
-                      <a href="index.html">Home</a>
+                      <Link to="/">Home</Link>
                     </li>
                     <li>
-                      <a href="about.html">About Us</a>
+                      <Link to="/about">About Us</Link>
                     </li>
                     <li>
-                      <a href="shop.html">Shop</a>
+                      <Link to="#">Shop</Link>
                     </li>
                     <li>
-                      <a href="contact.html">Contact</a>
+                      <Link to="/contact">Contact</Link>
                     </li>
                   </ul>
                   <h3 className="text-center follow">Follow Us</h3>
                   <ul className="social-iconsv2 agileinfo">
                     <li>
-                      <a href="#">
+                      <Link to="#">
                         <i className="fab fa-facebook-f" />
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#">
+                      <Link to="#">
                         <i className="fab fa-twitter" />
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#">
+                      <Link to="#">
                         <i className="fab fa-youtube" />
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#">
+                      <Link to="#">
                         <i className="fab fa-linkedin-in" />
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#">
+                      <Link to="#">
                         <i className="fab fa-google-plus-g" />
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -274,22 +275,22 @@ class Footer extends Component {
                 </div>
                 <div className="cpy-right align-self-center">
                   <h2 className="agile_btxt">
-                    <a href="index.html">
+                    <Link to="/">
                       e<span>f</span>ashion
-                    <span>S</span>tore</a>
+                      <span>S</span>tore</Link>
                   </h2>
                   <p>© 2021 eFashion Store. All rights reserved | Design by
-                    <a href="#" className="text-secondary"> Hira Datta Dhakal.</a>
+                    <Link to="#" className="text-secondary"> Hira Datta Dhakal.</Link>
                   </p>
                 </div>
               </div>
             </div>
           </div>
-        </footer>        
+        </footer>
         {/* //footer */}
-            </div>
-        )
-    }
+      </div>
+    )
+  }
 }
 
 export default Footer
