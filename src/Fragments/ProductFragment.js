@@ -135,8 +135,7 @@ class ProductFragment extends Component {
             this.updateProductImage(productId)
         }
     }
-
-    // creating function to upload product Image
+// creating function to upload product Image
     updateProductImage = (productId) => {
         console.log(this.state.filename)
         const data = new FormData();
@@ -149,7 +148,15 @@ class ProductFragment extends Component {
             .catch()
     }
 
-
+    // delete Product
+    removeProduct = async (productId) => {
+        const res = await axios.delete("http://localhost:90/product/delete/" + productId, {
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+        this.getProductDetails()
+    }
 
     render() {
         return (
