@@ -136,7 +136,20 @@ class ProductFragment extends Component {
         }
     }
 
-    
+    // creating function to upload product Image
+    updateProductImage = (productId) => {
+        console.log(this.state.filename)
+        const data = new FormData();
+        data.append('file', this.state.filename)
+        axios.put("http://localhost:90/product/image/upload/" + productId, data)
+            .then((result) => {
+                window.location.reload();
+                console.log(result)
+            })
+            .catch()
+    }
+
+
 
     render() {
         return (
