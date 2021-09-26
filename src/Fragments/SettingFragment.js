@@ -1,13 +1,14 @@
 import { Divider } from '@material-ui/core'
 import React, { Component } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 class SettingFragment extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            index: 1,
+            blogIndex: 1,
+            userIndex: 1,
             blog_id: "",
             fullname: "",
             email: "",
@@ -18,6 +19,7 @@ class SettingFragment extends Component {
             dob: "",
             gender: "",
             role: "",
+            profilePicUrl: "",
             teams: [],
             blogList: [],
             userList: [],
@@ -31,6 +33,7 @@ class SettingFragment extends Component {
     }
 
     componentDidMount() {
+        this.getAllUserDetails()
         this.getAllBlogDetails()
     }
 
@@ -43,12 +46,12 @@ class SettingFragment extends Component {
 
     // select  handler for options
     selectChangeHandler = (e) => {
-        const productName = e.target.value
         this.setState({ selectedTeam: e.target.value })
     }
 
+    // function to fetch all blog
     getAllBlogDetails = () => {
-        this.state.index = 1
+        this.state.blogIndex = 1
         axios.get("http://localhost:90/blog/get")
             .then((res) => {
                 console.log(res.data.data)
@@ -58,9 +61,15 @@ class SettingFragment extends Component {
             })
     }
 
+    // function to get all user
     getAllUserDetails = () => {
-        this.state.index = 1
-        axios.get("http://localhost:90/blog/get")
+        this.state.userIndex = 1
+        const con = {
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+        }
+        axios.get("http://localhost:90/user/get", con)
             .then((res) => {
                 console.log(res.data.data)
                 this.setState({
@@ -75,66 +84,46 @@ class SettingFragment extends Component {
         this.updateBlogImage()
     }
 
-    // function to get user profile
-    getUserData = async () => {
-        try {
-            console.log(localStorage.getItem("token"))
-            const con = {
-                headers: {
-                    'authorization': `Bearer ${localStorage.getItem("token")}`
-                }
+    // // function to get user profile
+    // getUserById = async () => {
+    //     try {
+    //         console.log(localStorage.getItem("token"))
+    //         const con = {
+    //             headers: {
+    //                 'authorization': `Bearer ${localStorage.getItem("token")}`
+    //             }
+    //         }
+
+    //         const res = await axios.get("http://localhost:90/user/profile", con)
+
+    //         this.setState({
+
+    //             fullname: res.data.data.fullname,
+    //             username: res.data.data.username,
+    //             email: res.data.data.email,
+    //             address: res.data.data.address,
+    //             phone: res.data.data.phone,
+    //             dob: res.data.data.dob,
+    //             gender: res.data.data.gender,
+    //             role: res.data.data.role,
+    //             profilePicUrl: res.data.data.profilePicUrl
+    //         })
+    //         console.log(res)
+    //     }
+    //     catch (e) {
+    //         console.error(e)
+    //     }
+    // }
+
+    // delete User
+    deleteUser = async (userId) => {
+        const con = {
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem("token")}`
             }
-
-            const res = await axios.get("http://localhost:90/user/profile", con)
-
-            this.setState({
-
-                fullname: res.data.data.fullname,
-                username: res.data.data.username,
-                email: res.data.data.email,
-                address: res.data.data.address,
-                phone: res.data.data.phone,
-                dob: res.data.data.dob,
-                gender: res.data.data.gender,
-                role: res.data.data.role,
-                profilePicUrl: res.data.data.profilePicUrl
-            })
-            console.log(res)
         }
-        catch (e) {
-            console.error(e)
-        }
-    }
-
-    // get User by id
-    getUserById = async () => {
-        try {
-            console.log(localStorage.getItem("token"))
-            const con = {
-                headers: {
-                    'authorization': `Bearer ${localStorage.getItem("token")}`
-                }
-            }
-
-            const res = await axios.get("http://localhost:90/user/profile", con)
-
-            this.setState({
-
-                fullname: res.data.data.fullname,
-                username: res.data.data.username,
-                email: res.data.data.email,
-                address: res.data.data.address,
-                phone: res.data.data.phone,
-                dob: res.data.data.dob,
-                gender: res.data.data.gender,
-                role: res.data.data.role,
-                profilePicUrl: res.data.data.profilePicUrl
-            })
-            console.log(res)
-        }
-        catch (e) {
-            console.error(e)
-        }
+        const res = await axios.delete("http://localhost:90/user/delete/" + userId, con)
+        this.getAllUserDetails()
     }
 
     // update blog
@@ -152,6 +141,7 @@ class SettingFragment extends Component {
         if (this.state.filename !== null) {
             this.updateBlogImage(blogId)
         }
+        this.getAllBlogDetails()
     }
     // creating function to upload product Image
     updateBlogImage = (blogId) => {
@@ -168,7 +158,7 @@ class SettingFragment extends Component {
 
     // delete Blog
     deleteBlog = async (blogId) => {
-        const res = await axios.delete("http://localhost:90/blog/delete/" + blogId)
+        axios.delete("http://localhost:90/blog/delete/" + blogId)
         this.getAllBlogDetails()
     }
 
@@ -279,7 +269,6 @@ class SettingFragment extends Component {
                                         </div>
                                         <div className="d-flex justify-content-between mt-4 pt-2">
                                             <button className="btn btn-primary btn-lg" type="submit" onClick={this.addNewUser}>Add User</button>
-                                            <button className="btn btn-primary btn-lg" type="submit" onClick={() => this.updateUser(this.state.blog_id)}>Update User</button>
                                         </div>
 
                                     </div>
@@ -296,13 +285,13 @@ class SettingFragment extends Component {
                             <li><a href="#">
                                 <em className="fa fa-list-alt" />
                             </a></li>
-                            <li className="active">Blogs</li>
+                            <li className="active">User List</li>
                         </ol>
                     </div>{/*/.row*/}
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="panel panel-default">
-                                <div className="panel-heading">All Blogs:</div>
+                                <div className="panel-heading">All User:</div>
                                 <div className="panel-body">
                                     <p style={{ fontSize: '16px', color: 'red' }} align="center"></p>
                                     <div className="col-md-12">
@@ -311,27 +300,35 @@ class SettingFragment extends Component {
                                                 <thead>
                                                     <tr>
                                                         <th>S.No.</th>
-                                                        <th>Blog Name</th>
-                                                        <th>Blog Description</th>
-                                                        <th>Blog Image</th>
-                                                        <th>Order Update</th>
-                                                        <th>Order Delete</th>
+                                                        <th>Full Name</th>
+                                                        <th>Email </th>
+                                                        <th>Address</th>
+                                                        <th>Phone</th>
+                                                        <th>DOB</th>
+                                                        <th>Gender</th>
+                                                        <th>Role</th>
+                                                        <th>Profile Picture</th>
+                                                        <th>User Delete</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     {
-                                                        this.state.blogList.map(blog => {
-                                                            const indexNum = this.state.index
-                                                            this.state.index++
+                                                        this.state.userList.map(user => {
+                                                            const indexUserNum = this.state.userIndex
+                                                            this.state.userIndex++
                                                             return (
                                                                 <tr>
-                                                                    <td>{indexNum}</td>
-                                                                    <td>{blog.blogName}</td>
-                                                                    <td>{blog.blogDescription}</td>
-                                                                    <td><img src={blog.blogImageUrl} alt="img" width="40px" height="70px" className="card-img-top" /></td>
+                                                                    <td>{indexUserNum}</td>
+                                                                    <td>{user.fullname}</td>
+                                                                    <td>{user.email}</td>
+                                                                    <td>{user.address}</td>
+                                                                    <td>{user.phone}</td>
+                                                                    <td>{user.dob}</td>
+                                                                    <td>{user.gender}</td>
+                                                                    <td>{user.role}</td>
+                                                                    <td><img src={user.profilePicUrl} alt="img" width="40px" height="50px" className="card-img-top" /></td>
 
-                                                                    <td><Link onClick={() => this.getBlogById(blog._id)}>Update</Link></td>
-                                                                    <td><Link onClick={() => this.deleteBlog(blog._id)}>Delete</Link></td>
+                                                                    <td><Link onClick={() => this.deleteUser(user._id)}>Delete</Link></td>
 
                                                                 </tr>
                                                             )
@@ -438,11 +435,11 @@ class SettingFragment extends Component {
                                                 <tbody>
                                                     {
                                                         this.state.blogList.map(blog => {
-                                                            const indexNum = this.state.index
-                                                            this.state.index++
+                                                            const indexBlogNum = this.state.blogIndex
+                                                            this.state.blogIndex++
                                                             return (
                                                                 <tr>
-                                                                    <td>{indexNum}</td>
+                                                                    <td>{indexBlogNum}</td>
                                                                     <td>{blog.blogName}</td>
                                                                     <td>{blog.blogDescription}</td>
                                                                     <td><img src={blog.blogImageUrl} alt="img" width="40px" height="70px" className="card-img-top" /></td>

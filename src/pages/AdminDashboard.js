@@ -72,6 +72,11 @@ export default function ClippedDrawer() {
         }
     }
 
+    const logout = () => {
+        localStorage.clear()
+        window.location.href = "http://localhost:3000/login"
+    }
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -151,14 +156,14 @@ export default function ClippedDrawer() {
                     </List>
                     <Divider />
                     <List>
-                        <NavLink to="/login">
-                            <ListItem button>
-                                <ListItemIcon>
-                                    <ExitToApp />
-                                </ListItemIcon>
-                                <ListItemText primary="Log out" />
-                            </ListItem>
-                        </NavLink>
+                        {/* <NavLink to="/login"> */}
+                        <ListItem button onClick={e => logout()}>
+                            <ListItemIcon>
+                                <ExitToApp />
+                            </ListItemIcon>
+                            <ListItemText primary="Log out" />
+                        </ListItem>
+                        {/* </NavLink> */}
                     </List>
                 </div>
             </Drawer>

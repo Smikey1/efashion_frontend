@@ -22,7 +22,7 @@ class Product extends Component {
       })
 
     //get product by Id
-    axios.get("http://localhost:90/product/get/" + this.state.id)
+    axios.get("http://localhost:90/product/getById/" + this.state.id)
       .then(res => {
         console.log(res)
         this.setState({

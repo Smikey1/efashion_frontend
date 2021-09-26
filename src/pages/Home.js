@@ -38,6 +38,7 @@ class Home extends Component {
   }
 
 
+  // function for add product to wishlist
   addToWishlist = (productId) => {
     const token = localStorage.getItem("token")
     console.log(token)

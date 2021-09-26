@@ -187,7 +187,7 @@ class Checkout extends Component {
                             <td className="invert">{idxx + 1}</td>
                             <td className="invert-image">
                               <Link to="#">
-                                <img src={cart.productId.productImageUrlList[0]} alt=" " className="img-responsive" />
+                                <img src={cart.productId.productImageUrlList[0]} alt=" " width="80px" height="80px" className="img-responsive" />
                               </Link>
                             </td>
                             <td className="invert">

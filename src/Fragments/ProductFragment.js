@@ -137,7 +137,7 @@ class ProductFragment extends Component {
     updateProductImage = (productId) => {
         console.log(this.state.filename)
         const data = new FormData();
-        data.append('file', this.state.filename)
+        data.append('image', this.state.filename)
         axios.put("http://localhost:90/product/image/upload/" + productId, data)
             .then((result) => {
                 window.location.reload();
@@ -229,7 +229,7 @@ class ProductFragment extends Component {
                                             <div className="col-md-6 mb-4 pb-2">
                                                 <div className="form-outline">
                                                     <label className="form-label" htmlFor="phoneNumber">Add Product Image</label>
-                                                    <input type="file" name="files" onChange={this.changeFileHandler} />
+                                                    <input type="file" name="filename" onChange={this.changeFileHandler} />
                                                 </div>
                                             </div>
                                         </div>

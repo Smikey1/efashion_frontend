@@ -35,6 +35,23 @@ class ProductCollection extends Component {
     alert("added to cart")
   }
 
+  // function for add product to wishlist
+  addToWishlist = (productId) => {
+    const token = localStorage.getItem("token")
+    console.log(token)
+    console.log(productId)
+    console.log("http://localhost:90/wishlist/insert/" + productId)
+    axios.post("http://localhost:90/wishlist/insert/" + productId, { productId }, {
+      headers: {
+        'authorization': "Bearer " + token,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+
+    })
+    alert("Item Added to wishlist")
+
+  }
 
   render() {
     return (

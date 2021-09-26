@@ -37,22 +37,22 @@ class HomeFragment extends Component {
 
   addProduct = () => {
     alert("hello")
-    // const productData = {
-    //   productName: this.state.productName,
-    //   productPrice: this.state.productPrice,
-    //   productType: this.state.productType,
-    //   productCategory: this.state.productCategory,
-    //   featureName: this.state.featureName,
-    //   featureValue: this.state.featureValue,
-    //   productDescription: this.state.productDescription,
-    // }
-    // console.log(productData)
+    const productData = {
+      productName: this.state.productName,
+      productPrice: this.state.productPrice,
+      productType: this.state.productType,
+      productCategory: this.state.productCategory,
+      featureName: this.state.featureName,
+      featureValue: this.state.featureValue,
+      productDescription: this.state.productDescription,
+    }
+    console.log(productData)
     // api to insert product
-    // axios.post("http://localhost:90/product/insert", productData)
-    //   .then((res) => {
-    //     console.log("product Added")
-    //     alert("product Added")
-    //   })
+    axios.post("http://localhost:90/product/insert", productData)
+      .then((res) => {
+        console.log("product Added")
+        alert("product Added")
+      })
   }
 
   // for text handler change

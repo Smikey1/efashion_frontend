@@ -101,20 +101,9 @@ class Wishlist extends Component {
                             <td className="invert">{idxx + 1}</td>
                             <td className="invert-image">
                               <Link to="#">
-                                <img src={product.productId.productImageUrlList[0]} alt=" " className="img-responsive" />
+                                <img src={product.productId.productImageUrlList[0]} alt=" " height="80px" width="80px" className="img-responsive" />
                               </Link>
                             </td>
-                            {/* <td className="invert">
-                              <div className="quantity">
-                                <div className="quantity-select">
-                                  <div className="entry value-minus" onClick={this.qty--}>&nbsp;</div>
-                                  <div className="entry value">
-                                    <span>{qty}</span>
-                                  </div>
-                                  <div className="entry value-plus active" onClick={this.qty++}>&nbsp;</div>
-                                </div>
-                              </div>
-                            </td> */}
                             <td className="invert">{product.productId.productName}</td>
                             <td className="invert">{product.productId.productPrice}</td>
                             <td className="invert">
