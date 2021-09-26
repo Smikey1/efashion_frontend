@@ -143,7 +143,7 @@ class AccountFragment extends Component {
     // for update user profile 
     updateProfile = async (e) => {
         // to stop reloading of the page
-        e.preventDefault();
+        // e.preventDefault();
         const userId = localStorage.getItem("userId")
         const con = {
 
@@ -164,6 +164,8 @@ class AccountFragment extends Component {
             role: this.state.role,
             password: this.state.password,
         }, con)
+
+        window.location.href = "http://localhost:3000/login"
 
         if (this.state.filename !== null) {
             this.updateProfileImage()
@@ -196,6 +198,8 @@ class AccountFragment extends Component {
         const res = await axios.put("http://localhost:90/user/change-password/" + userId, {
             password: this.state.password,
         }, con)
+        window.location.href = "http://localhost:3000/login"
+
     }
     render() {
         const userId = localStorage.getItem("userId")
@@ -226,7 +230,7 @@ class AccountFragment extends Component {
                                 <div className="col-md-12"><label className="labels">Gender</label><input type="text" className="form-control" name="gender" onChange={this.userGender} value={this.state.gender} placeholder="Enter your gender" /></div>
                                 <div className="col-md-12"><label className="labels">Date of Birth</label><input type="text" className="form-control" name="dob" onChange={this.userDob} value={this.state.dob} placeholder="Enter your dob" /></div>
                             </div>
-                            
+
                             <div className="mt-5 text-center"><button className="btn btn-primary profile-button" onClick={this.updateProfile} type="button">Update Profile</button></div>
                         </div>
                     </div>

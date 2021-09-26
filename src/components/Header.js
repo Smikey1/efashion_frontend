@@ -60,7 +60,7 @@ class Header extends Component {
                     <select className="form-control input-lg" name="category"
                       value={this.state.selectedTeam}
                       onChange={(e) => this.selectChangeHandler(e)}
-                      >
+                    >
                       {this.state.teams.map((team) => <option key={team.value} value={team.value}>{team.display}</option>)}
 
                       <option value="all">Search our store</option>
@@ -138,7 +138,7 @@ class Header extends Component {
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/productCollection">Store</Link>
+                      <Link className="nav-link" to="/productCollection">Our Store</Link>
                     </li>
                     <li className="nav-item dropdown has-mega-menu" style={{ position: 'static' }}>
                       <Link className="nav-link dropdown-toggle" data-toggle="dropdown" to="#" role="button" aria-haspopup="true" aria-expanded="false">Men's clothing</Link>

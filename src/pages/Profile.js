@@ -142,7 +142,7 @@ class Profile extends Component {
     // for update user profile 
     updateProfile = async (e) => {
         // to stop reloading of the page
-        e.preventDefault();
+        // e.preventDefault();
         const userId = localStorage.getItem("userId")
         const con = {
 
@@ -195,6 +195,7 @@ class Profile extends Component {
         const res = await axios.put("http://localhost:90/user/change-password/" + userId, {
             password: this.state.password,
         }, con)
+        this.props.history.push("/login")
     }
     render() {
         const userId = localStorage.getItem("userId")
@@ -224,7 +225,7 @@ class Profile extends Component {
                                 <div className="col-md-12"><label className="labels">Phone</label><input type="text" className="form-control" name="phone" onChange={this.userPhone} value={this.state.phone} placeholder="Enter your phone" /></div>
                                 <div className="col-md-12"><label className="labels">Gender</label><input type="text" className="form-control" name="gender" onChange={this.userGender} value={this.state.gender} placeholder="Enter your gender" /></div>
                                 <div className="col-md-12"><label className="labels">Date of Birth</label><input type="text" className="form-control" name="dob" onChange={this.userDob} value={this.state.dob} placeholder="Enter your dob" /></div>
-                                <div className="col-md-12"><label className="labels">Role</label><input type="text" className="form-control" name="role" onChange={this.userRole} value={this.state.role} placeholder="Your role" /></div>
+                                <div className="col-md-12"><label className="labels">Role</label><input type="text" className="form-control" name="role" value={this.state.role} placeholder="Your role" /></div>
                             </div>
                             <div className="row mt-3">
                                 <div className="col-md-6"><label className="labels">Password</label><input type="password" className="form-control" onChange={this.userPassword} value={this.state.password} name="Password" placeholder="Password" /></div>
