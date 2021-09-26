@@ -47,10 +47,10 @@ class CategoryFragment extends Component {
         myCategory: [],
         data: [],
         columns: [
-            { title: 'Index', field: '_id', type: 'numeric' },
-            { title: 'Category', field: 'categoryName', editable: 'onAdd' },
+            { title: 'Category Id', field: '_id', type: 'numeric' },
+            { title: 'Category Name', field: 'categoryName', editable: 'onAdd' },
             {
-                title: 'Icon', field: 'categoryImageUrl',
+                title: 'Category Icon', field: 'categoryImageUrl',
                 editComponent: props => (
                     <>
                         <input
@@ -112,7 +112,7 @@ class CategoryFragment extends Component {
                 <Container maxWidth="md" fixed>
                     <MaterialTable
                         icons={tableIcons}
-                        title="Disable Field Editable Preview"
+                        title="All Category Items"
                         columns={this.state.columns}
                         data={this.state.data}
                         editable={{
