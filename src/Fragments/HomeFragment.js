@@ -22,6 +22,7 @@ class HomeFragment extends Component {
     categoryList: [],
     categoryName: "",
     productList: [],
+    bannerList: [],
     addDialog: false,
     teams: [],
     selectedItemId: "",
@@ -35,6 +36,7 @@ class HomeFragment extends Component {
     productDescription: "",
   }
 
+  // function to add product
   addProduct = () => {
     alert("hello")
     const productData = {
@@ -55,6 +57,23 @@ class HomeFragment extends Component {
       })
   }
 
+  // function to get bannerList
+  getBannerList = () => {
+    // api to insert product
+    axios.get("http://localhost:90/banner/get")
+      .then((res) => {
+        const imageList = res.data.data[0].bannerImageUrlList
+        let bannerLst = []
+        imageList.map(image => {
+          bannerLst.push({ image })
+        })
+        this.setState({
+          bannerList: bannerLst
+        })
+      
+      })
+  }
+
   // for text handler change
   textChangeHandler = (e) => {
     this.setState({
@@ -69,6 +88,7 @@ class HomeFragment extends Component {
 
   // api to get category List
   componentDidMount() {
+    this.getBannerList()
     axios.get("http://localhost:90/category/get")
       .then((res) => {
 
@@ -121,7 +141,10 @@ class HomeFragment extends Component {
 
           </Tabs>
         </AppBar>
-        <BannerSlider Images={[{ image: "https://images.unsplash.com/photo-1612151855475-877969f4a6cc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGQlMjBpbWFnZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80" }]}></BannerSlider>
+        <BannerSlider
+          Images={this.state.bannerList}>
+
+        </BannerSlider>
         <HorizontalScroller />
         <GridView />
 

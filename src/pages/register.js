@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import logo from "../media/logo.png"
 import {
     Container,
@@ -52,7 +52,7 @@ class Register extends Component {
             this.state.password_error = "Required password"
             valid_data = false
         }
-        this.setState({update: true})
+        this.setState({ update: true })
 
         if (valid_data) {
             this.state.show_progress_bar = true
@@ -65,12 +65,13 @@ class Register extends Component {
                 .post("http://localhost:90/user/register", data)
                 .then((response) => {
                     if (response.data.success === true) {
-                        this.setState({show_progress_bar: false})
+                        this.setState({ show_progress_bar: false })
+                        this.props.history.push("/login")
                         console.log("Successfully Register")
                     }
                 })
                 .catch((err) => {
-                    this.setState({show_progress_bar: false, email_error: "Error in registration"})
+                    this.setState({ show_progress_bar: false, email_error: "Error in registration" })
                     console.log("Something went wrong!")
                     this.state.email_error = "Something went wrong"
                 })
@@ -87,7 +88,7 @@ class Register extends Component {
                     textAlign="center"
                     mt="50px"
                     p="24px">
-                    <img src={logo} height="50px"/>
+                    <img src={logo} height="50px" />
                     <Typography varient="h5" color="textSecondary">eFashion Store Admin</Typography>
                     <TextField
                         label="Full Name"
@@ -100,7 +101,7 @@ class Register extends Component {
                         onChange={this.handleChange}
                         margin="normal"
                         color="seconda ry"
-                        size="small"/>
+                        size="small" />
                     <TextField
                         label="Email"
                         id="outlined-size-small"
@@ -113,7 +114,7 @@ class Register extends Component {
                         onChange={this.handleChange}
                         margin="normal"
                         color="seconda ry"
-                        size="small"/>
+                        size="small" />
                     <TextField
                         label="Password"
                         id="outlined-size-small"
@@ -126,13 +127,27 @@ class Register extends Component {
                         onChange={this.handleChange}
                         fullWidth
                         margin="normal"
-                        size="small"/>
-                    <br/>
-                    <br/> {this.state.show_progress_bar
-                        ? <CircularProgress color="primary" size={29}/>
+                        size="small" />
+
+                    <TextField
+                        label="Confirm Password"
+                        id="outlined-size-small"
+                        type="Password"
+                        variant="outlined"
+                        fullWidth
+                        name="password1"
+                        error={this.state.email_error != null}
+                        helperText={this.state.email_error}
+                        onChange={this.handleChange}
+                        margin="normal"
+                        color="seconda ry"
+                        size="small" />
+                    <br />
+                    <br /> {this.state.show_progress_bar
+                        ? <CircularProgress color="primary" size={29} />
                         : null}
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
                     <Button
                         disableElevation
                         variant="contained"
