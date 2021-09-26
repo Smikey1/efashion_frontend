@@ -8,6 +8,7 @@ class OrderFragment extends Component {
 
     state = {
         orderList: [],
+        ord: [],
         index: 1,
         order_id: "",
         orderId: "",
@@ -56,18 +57,19 @@ class OrderFragment extends Component {
     }
 
     // update Order
-    updateOrder = (orderId) => {
+    updateOrder = (orderId, msg) => {
         const con = {
             headers: {
                 'authorization': `Bearer ${localStorage.getItem("token")}`
             }
         }
         const updateOrderDetails = {
-            deliveryStatusMessage: this.state.deliveryStatusMessage
+            deliveryStatusMessage: msg
         }
         axios.put("http://localhost:90/order/update/" + orderId, updateOrderDetails, con)
             .then((result) => {
                 console.log(result)
+                this.getOrderDetails()
                 Swal.fire({
                     title: 'Order Update Successfully',
                     icon: 'success',
@@ -104,13 +106,13 @@ class OrderFragment extends Component {
                                         <div className="row">
                                             <div className="col-md-6 mb-4 pb-2">
                                                 <div className="form-outline">
-                                                    <input type="text" name="OrderName" onChange={this.OrderName} value={this.state.OrderName} className="form-control form-control-lg" />
-                                                    <label className="form-label" htmlFor="phoneNumber">Order Name</label>
+                                                    <input type="text" name="OrderName" value={this.state.OrderName} className="form-control form-control-lg" />
+                                                    <label className="form-label" htmlFor="phoneNumber">Product Name</label>
                                                 </div>
                                             </div>
                                             <div className="col-md-6 mb-4 pb-2">
                                                 <div className="form-outline">
-                                                    <input type="text" name="OrderPrice" onChange={this.OrderPrice} value={this.state.OrderPrice} className="form-control form-control-lg" />
+                                                    <input type="text" name="OrderPrice" value={this.state.OrderPrice} className="form-control form-control-lg" />
                                                     <label className="form-label" htmlFor="phoneNumber">Order Price</label>
                                                 </div>
                                             </div>
@@ -118,13 +120,13 @@ class OrderFragment extends Component {
                                         <div className="row">
                                             <div className="col-md-6 mb-4 pb-2">
                                                 <div className="form-outline">
-                                                    <input type="text" name="featureName" onChange={this.featureName} value={this.state.featureName} className="form-control form-control-lg" />
+                                                    <input type="text" name="featureName" value={this.state.featureName} className="form-control form-control-lg" />
                                                     <label className="form-label" >Feature Name</label>
                                                 </div>
                                             </div>
                                             <div className="col-md-6 mb-4 pb-2">
                                                 <div className="form-outline">
-                                                    <input type="text" name="featureValue" onChange={this.featureValue} value={this.state.featureValue} className="form-control form-control-lg" />
+                                                    <input type="text" name="featureValue" value={this.state.featureValue} className="form-control form-control-lg" />
                                                     <label className="form-label" >Feature Value</label>
                                                 </div>
                                             </div>
@@ -133,13 +135,13 @@ class OrderFragment extends Component {
                                         <div className="row">
                                             <div className="col-md-6 mb-4 pb-2">
                                                 <div className="form-outline">
-                                                    <input type="text" name="OrderDescription" onChange={this.OrderDescription} value={this.state.OrderDescription} className="form-control form-control-lg" />
+                                                    <input type="text" name="OrderDescription" value={this.state.OrderDescription} className="form-control form-control-lg" />
                                                     <label className="form-label" >Order Description</label>
                                                 </div>
                                             </div>
                                             <div className="col-md-6 mb-4 pb-2">
                                                 <div className="form-outline">
-                                                    <input type="text" name="OrderType" onChange={this.OrderType} value={this.state.OrderType} className="form-control form-control-lg" />
+                                                    <input type="text" name="OrderType" value={this.state.OrderType} className="form-control form-control-lg" />
                                                     <label className="form-label" >Order Type</label>
                                                 </div>
                                             </div>
@@ -147,7 +149,7 @@ class OrderFragment extends Component {
                                         <div className="row">
                                             <label className="form-label select-label">Select Order Status</label>
                                             <div className="col-12">
-                                                <select className="select form-control-lg"
+                                                <select className="select form-control-sm"
                                                     value={this.state.selectedTeam}
                                                     onChange={(e) => this.selectChangeHandler(e)}
                                                 >
@@ -202,20 +204,67 @@ class OrderFragment extends Component {
                                                 </thead>
                                                 <tbody>
                                                     {
-
                                                         this.state.orderList.map(order => {
                                                             const indexNum = this.state.index
                                                             this.state.index++
+                                                            console.log(order)
                                                             return (
                                                                 <tr>
                                                                     <td>{indexNum}</td>
                                                                     <td>{order._id}</td>
-                                                                    {/* <td>{order[0].productId.productName}</td>
-                                                                    <td>{order[0].productId.productPrice}</td>
-                                                                    <td>{order[0].userId.fullname}</td>
-                                                                    <td>{order.deliveryStatusMessage}</td> */}
+                                                                    <td>
+                                                                        {
+                                                                            order.order.map(ord => {
+                                                                                return (
+                                                                                    <p> {ord.productId.productName}</p>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                    </td>
+                                                                    <td>
+                                                                        {
+                                                                            order.order.map(ord => {
+                                                                                return (
+                                                                                    <p> {ord.productId.productPrice}</p>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                    </td>
 
-                                                                    <td><Link onClick={() => this.getOrderById(order._id)}>Update</Link></td>
+                                                                    <td>{order.userId.fullname}</td>
+                                                                    {/* <td>{order.deliveryStatusMessage}</td> */}
+                                                                    <td>
+                                                                        {/* {
+                                                                        if(order.deliveryStatusMessage==="pending"){
+                                                                            return(
+                                                                                <p>Change</p>
+
+                                                                        )
+                                                                        }
+                                                                        else{
+                                                                            return(
+                                                                        <p>{order.deliveryStatusMessage}</p>
+                                                                            )}} */}
+
+                                                                        {
+                                                                            (order.deliveryStatusMessage === "Pending") ? (<select className="select form-control-sm"
+                                                                                value={order.deliveryStatusMessage}
+                                                                                onChange={(e) => {
+                                                                                    this.updateOrder(order._id, e.target.value)
+                                                                                }}
+                                                                            >
+                                                                                <option value="Pending">Pending</option>
+                                                                                <option value="Completed">Completed</option>
+                                                                                <option value="Cancel">Cancel</option>
+                                                                            </select>) : (<p>{order.deliveryStatusMessage}</p>)
+
+
+                                                                        }
+
+                                                                    </td>
+                                                                    <td><Link onClick={() => {
+                                                                        // this.state.ord = order
+                                                                    }}>Update</Link></td>
                                                                     <td><Link onClick={() => this.removeOrder(order._id)}>Delete</Link></td>
 
                                                                 </tr>
@@ -230,7 +279,7 @@ class OrderFragment extends Component {
                             </div>
                         </div>
                     </div>
-                
+
                 </div>
             </div>
         )

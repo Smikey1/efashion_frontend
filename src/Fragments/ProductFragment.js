@@ -214,7 +214,7 @@ class ProductFragment extends Component {
                                         <div className="row">
                                             <div className="col-md-6 mb-4 pb-2">
                                                 <label className="form-label select-label">Choose option</label>
-                                                <select className="select form-control-lg">
+                                                <select className="select form-control-sm">
                                                     <option value={1}>Choose Category</option>
                                                     {
                                                         this.state.categoryList.map((category) => {

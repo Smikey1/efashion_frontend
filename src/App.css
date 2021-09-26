@@ -28,6 +28,43 @@
   color: #61dafb;
 }
 
+.centerp {
+  display: flex;
+  justify-content: center;
+}
+
+.productView {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.myproductitem {
+  padding: 25px;
+  border: 0.25px solid rgb(206, 205, 205);
+}
+/* Table */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table p {
+  color: rgb(0, 0, 0);
+}
+td,
+th {
+  border-bottom: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgba(240, 121, 85, 0.8);
+}
+tbody tr:nth-child(odd) {
+  background-color: #9cf5f5;
+}
+
 .card-group img {
   max-height: 221px;
 }

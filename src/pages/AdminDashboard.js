@@ -13,6 +13,7 @@ import {
     Category, Devices, ExitToApp, Person, Public, Settings, ShoppingCart, Store
 } from '@material-ui/icons';
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import AccountFragment from '../Fragments/AccountFragment';
 import CategoryFragment from '../Fragments/CategoryFragment';
 import HomeFragment from '../Fragments/HomeFragment.js';
@@ -150,12 +151,14 @@ export default function ClippedDrawer() {
                     </List>
                     <Divider />
                     <List>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <ExitToApp />
-                            </ListItemIcon>
-                            <ListItemText primary="Log out" />
-                        </ListItem>
+                        <NavLink to="/login">
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <ExitToApp />
+                                </ListItemIcon>
+                                <ListItemText primary="Log out" />
+                            </ListItem>
+                        </NavLink>
                     </List>
                 </div>
             </Drawer>

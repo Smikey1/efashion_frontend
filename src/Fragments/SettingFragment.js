@@ -14,11 +14,13 @@ class SettingFragment extends Component {
             password: "",
             confirmPassword: "",
             phone: "",
+            address: "",
             dob: "",
             gender: "",
             role: "",
             teams: [],
             blogList: [],
+            userList: [],
             selectedTeam: "",
             selectedItemId: "",
             blogName: "",
@@ -56,21 +58,83 @@ class SettingFragment extends Component {
             })
     }
 
+    getAllUserDetails = () => {
+        this.state.index = 1
+        axios.get("http://localhost:90/blog/get")
+            .then((res) => {
+                console.log(res.data.data)
+                this.setState({
+                    userList: res.data.data,
+                })
+            })
+    }
+
     // for choosing image
     changeFileHandler = (e) => {
         this.state.filename = e.target.files[0]
         this.updateBlogImage()
     }
 
-    // get Blog by id
-    getBlogById = async (blogId) => {
-        this.state.blog_id = blogId
-        const res = await axios.get("http://localhost:90/blog/getById/" + blogId)
-        this.setState({
-            blogName: res.data.data.blogName,
-            blogDescription: res.data.data.blogDescription,
-        })
-        console.log(res.data.data)
+    // function to get user profile
+    getUserData = async () => {
+        try {
+            console.log(localStorage.getItem("token"))
+            const con = {
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem("token")}`
+                }
+            }
+
+            const res = await axios.get("http://localhost:90/user/profile", con)
+
+            this.setState({
+
+                fullname: res.data.data.fullname,
+                username: res.data.data.username,
+                email: res.data.data.email,
+                address: res.data.data.address,
+                phone: res.data.data.phone,
+                dob: res.data.data.dob,
+                gender: res.data.data.gender,
+                role: res.data.data.role,
+                profilePicUrl: res.data.data.profilePicUrl
+            })
+            console.log(res)
+        }
+        catch (e) {
+            console.error(e)
+        }
+    }
+
+    // get User by id
+    getUserById = async () => {
+        try {
+            console.log(localStorage.getItem("token"))
+            const con = {
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem("token")}`
+                }
+            }
+
+            const res = await axios.get("http://localhost:90/user/profile", con)
+
+            this.setState({
+
+                fullname: res.data.data.fullname,
+                username: res.data.data.username,
+                email: res.data.data.email,
+                address: res.data.data.address,
+                phone: res.data.data.phone,
+                dob: res.data.data.dob,
+                gender: res.data.data.gender,
+                role: res.data.data.role,
+                profilePicUrl: res.data.data.profilePicUrl
+            })
+            console.log(res)
+        }
+        catch (e) {
+            console.error(e)
+        }
     }
 
     // update blog
@@ -109,14 +173,19 @@ class SettingFragment extends Component {
     }
 
     // function to create new user
-    addNewUser = () => {
+    addNewUser = (e) => {
+        e.preventDefault();
         const addUserData = {
             fullname: this.state.fullname,
             email: this.state.email,
             password: this.state.password,
-            role: this.state.role,
-            phone: this.state.phone
+            role: this.state.selectedTeam,
+            gender: this.state.gender,
+            dob: this.state.dob,
+            phone: this.state.phone,
+            address: this.state.address
         }
+        console.log(addUserData)
         axios.post("http://localhost:90/user/register", addUserData)
             .then((response) => {
                 if (response.data.success === true) {
@@ -136,82 +205,148 @@ class SettingFragment extends Component {
                                 <div className="card shadow-2-strong card-registration" style={{ borderRadius: '15px' }}>
                                     <div className="card-body p-4 p-md-5">
                                         <h3 className="mb-4 pb-2 pb-md-0 mb-md-5">Add New User/Admin</h3>
-                                        <form>
-                                            <div className="row">
-                                                <div className="col-md-6 mb-4 pb-2">
-                                                    <div className="form-outline">
-                                                        <input type="text" id="phoneNumber" name="fullname" onChange={this.textHandleChange} value={this.state.fullname} className="form-control form-control-lg" />
-                                                        <label className="form-label" htmlFor="phoneNumber">Full Name</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col-md-6 mb-4 pb-2">
-                                                    <div className="form-outline">
-                                                        <input type="email" id="emailAddress" name="email" onChange={this.textHandleChange} value={this.state.email} className="form-control form-control-lg" />
-                                                        <label className="form-label" htmlFor="emailAddress">Email</label>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-6 mb-4 pb-2">
-                                                    <div className="form-outline">
-                                                        <input type="tel" id="phone" name="phone" onChange={this.textHandleChange} value={this.state.phone} className="form-control form-control-lg" />
-                                                        <label className="form-label" htmlFor="phoneNumber">Phone Number</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col-md-6 mb-4 d-flex align-items-center">
-                                                    <div className="form-outline datepicker w-100">
-                                                        <input type="text" name="dob" onChange={this.textHandleChange} value={this.state.dob} className="form-control form-control-lg" id="birthdayDate" />
-                                                        <label htmlFor="birthdayDate" className="form-label">Date of Birth</label>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-6 mb-4 pb-2">
-                                                    <div className="form-outline">
-                                                        <input type="text" id="pass2" name="gender" onChange={this.textHandleChange} value={this.state.gender} className="form-control form-control-lg" />
-                                                        <label className="form-label" >Gender</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col-md-6 mb-4 pb-2">
-                                                    <div className="form-outline">
-                                                        <input type="password" id="pass1" name="password" onChange={this.textHandleChange} value={this.state.password} className="form-control form-control-lg" />
-                                                        <label className="form-label" >Password</label>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-6 mb-4 pb-2">
-                                                    <div className="form-outline">
-                                                        <input type="password" id="pass2" name="confirmPassword" onChange={this.textHandleChange} value={this.state.confirmPassword} className="form-control form-control-lg" />
-                                                        <label className="form-label" >Confirm Password</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="row">
-                                                <label className="form-label select-label">Choose option</label>
-                                                <div className="col-12">
-                                                    <select className="select form-control-lg"
-                                                        value={this.state.selectedTeam}
-                                                        onChange={(e) => this.selectChangeHandler(e)}
-                                                    >
 
-                                                        <option value={1}>Choose role</option>
-                                                        <option value={2}>Admin</option>
-                                                        <option value={3}>Customer</option>
-                                                    </select>
-
+                                        <div className="row">
+                                            <div className="col-md-6 mb-4 pb-2">
+                                                <div className="form-outline">
+                                                    <input type="text" id="phoneNumber" name="fullname" onChange={this.textHandleChange} value={this.state.fullname} className="form-control form-control-lg" />
+                                                    <label className="form-label" htmlFor="phoneNumber">Full Name</label>
                                                 </div>
                                             </div>
-                                            <div className="mt-4 pt-2">
-                                                <input className="btn btn-primary btn-lg" type="submit" defaultValue="Submit" />
+                                            <div className="col-md-6 mb-4 pb-2">
+                                                <div className="form-outline">
+                                                    <input type="email" id="emailAddress" name="email" onChange={this.textHandleChange} value={this.state.email} className="form-control form-control-lg" />
+                                                    <label className="form-label" htmlFor="emailAddress">Email</label>
+                                                </div>
                                             </div>
-                                        </form>
+                                        </div>
+                                        <div className="row">
+
+                                            <div className="col-md-6 mb-4 pb-2">
+                                                <div className="form-outline">
+                                                    <input type="text" id="phoneNumber" name="address" onChange={this.textHandleChange} value={this.state.address} className="form-control form-control-lg" />
+                                                    <label className="form-label" htmlFor="address">Address</label>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6 mb-4 pb-2">
+                                                <div className="form-outline">
+                                                    <input type="number" id="phone" name="phone" onChange={this.textHandleChange} value={this.state.phone} className="form-control form-control-lg" />
+                                                    <label className="form-label" htmlFor="phoneNumber">Phone Number</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6 mb-4 d-flex align-items-center">
+                                                <div className="form-outline datepicker w-100">
+                                                    <input type="text" name="dob" onChange={this.textHandleChange} value={this.state.dob} className="form-control form-control-lg" id="birthdayDate" />
+                                                    <label htmlFor="birthdayDate" className="form-label">Date of Birth</label>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6 mb-4 pb-2">
+                                                <div className="form-outline">
+                                                    <input type="text" id="pass2" name="gender" onChange={this.textHandleChange} value={this.state.gender} className="form-control form-control-lg" />
+                                                    <label className="form-label" >Gender</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6 mb-4 pb-2">
+                                                <div className="form-outline">
+                                                    <input type="password" id="pass1" name="password" onChange={this.textHandleChange} value={this.state.password} className="form-control form-control-lg" />
+                                                    <label className="form-label" >Password</label>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6 mb-4 pb-2">
+                                                <div className="form-outline">
+                                                    <input type="password" id="pass2" name="confirmPassword" onChange={this.textHandleChange} value={this.state.confirmPassword} className="form-control form-control-lg" />
+                                                    <label className="form-label" >Confirm Password</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <label className="form-label select-label">Choose option</label>
+                                            <div className="col-12">
+                                                <select className="select form-control-sm"
+                                                    value={this.state.selectedTeam}
+                                                    onChange={(e) => this.selectChangeHandler(e)}
+                                                >
+                                                    <option value='role'>Choose role</option>
+                                                    <option value="Admin">Admin</option>
+                                                    <option value="Customer">Customer</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div className="d-flex justify-content-between mt-4 pt-2">
+                                            <button className="btn btn-primary btn-lg" type="submit" onClick={this.addNewUser}>Add User</button>
+                                            <button className="btn btn-primary btn-lg" type="submit" onClick={() => this.updateUser(this.state.blog_id)}>Update User</button>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
+
+                <Divider />
+                <div className="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+                    <div className="row">
+                        <ol className="breadcrumb">
+                            <li><a href="#">
+                                <em className="fa fa-list-alt" />
+                            </a></li>
+                            <li className="active">Blogs</li>
+                        </ol>
+                    </div>{/*/.row*/}
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="panel panel-default">
+                                <div className="panel-heading">All Blogs:</div>
+                                <div className="panel-body">
+                                    <p style={{ fontSize: '16px', color: 'red' }} align="center"></p>
+                                    <div className="col-md-12">
+                                        <div className="table-responsive">
+                                            <table className="table table-bordered mg-b-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S.No.</th>
+                                                        <th>Blog Name</th>
+                                                        <th>Blog Description</th>
+                                                        <th>Blog Image</th>
+                                                        <th>Order Update</th>
+                                                        <th>Order Delete</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {
+                                                        this.state.blogList.map(blog => {
+                                                            const indexNum = this.state.index
+                                                            this.state.index++
+                                                            return (
+                                                                <tr>
+                                                                    <td>{indexNum}</td>
+                                                                    <td>{blog.blogName}</td>
+                                                                    <td>{blog.blogDescription}</td>
+                                                                    <td><img src={blog.blogImageUrl} alt="img" width="40px" height="70px" className="card-img-top" /></td>
+
+                                                                    <td><Link onClick={() => this.getBlogById(blog._id)}>Update</Link></td>
+                                                                    <td><Link onClick={() => this.deleteBlog(blog._id)}>Delete</Link></td>
+
+                                                                </tr>
+                                                            )
+                                                        })
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
                 <Divider />
 
                 <section className="vh-100 gradient-custom">
@@ -310,7 +445,7 @@ class SettingFragment extends Component {
                                                                     <td>{indexNum}</td>
                                                                     <td>{blog.blogName}</td>
                                                                     <td>{blog.blogDescription}</td>
-                                                                    <td><img src={blog.blogImageUrl} alt="img" className="card-img-top" /></td>
+                                                                    <td><img src={blog.blogImageUrl} alt="img" width="40px" height="70px" className="card-img-top" /></td>
 
                                                                     <td><Link onClick={() => this.getBlogById(blog._id)}>Update</Link></td>
                                                                     <td><Link onClick={() => this.deleteBlog(blog._id)}>Delete</Link></td>
@@ -329,6 +464,7 @@ class SettingFragment extends Component {
                     </div>
 
                 </div>
+
             </div>
         )
     }

@@ -22,28 +22,22 @@ class GridView extends Component {
         return (
             <Box bgcolor="white" my="10px" p="8px">
                 <Typography variant="h5">Trending Items</Typography>
+                <div className="productView">
 
-                {
-                    this.state.myProduct.map(product => {
-                        return (
-                            <Box display="flex" p="15px" justifyContent="center">
+                    {
+                        this.state.myProduct.map(product => {
+                            return (
                                 <ProductView
                                     productImage={product.productImageUrlList[0]}
                                     productName={product.productName}
                                     productPrice={product.productPrice}
                                     productShortDescription={product.productShortDescription}
                                 />
-                                <ProductView
-                                    productImage={product.productImageUrlList[0]}
-                                    productName={product.productName}
-                                    productPrice={product.productPrice}
-                                    productShortDescription={product.productShortDescription}
-                                />
-                            </Box>
-                        )
-                    })
-                }
+                            )
+                        })
+                    }
 
+                </div>
             </Box>
         )
     }
