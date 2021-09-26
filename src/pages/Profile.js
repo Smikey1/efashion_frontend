@@ -115,7 +115,6 @@ class Profile extends Component {
 
     // for choosing image
     changeFileHandler = (e) => {
-        console.log("now i m changing profile picture")
         this.state.filename = e.target.files[0]
         this.updateProfileImage()
     }
@@ -131,6 +130,7 @@ class Profile extends Component {
         console.log(this.state.filename)
         const data = new FormData();
         data.append('file', this.state.filename)
+        console.log(data)
         axios.put("http://localhost:90/user/profile/upload/" + userId, data, con)
             .then((result) => {
                 window.location.reload();

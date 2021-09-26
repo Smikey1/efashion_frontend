@@ -2,8 +2,29 @@ import React, { Component } from 'react'
 import { Link, NavLink } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import axios from 'axios'
 
 class BlogCollection extends Component {
+  state = {
+    blogList: [],
+  }
+
+  componentDidMount() {
+    this.getAllBlogDetails()
+  }
+
+  getAllBlogDetails = () => {
+    this.state.index = 1
+    axios.get("http://localhost:90/blog/get")
+      .then((res) => {
+        console.log(res.data.data)
+        this.setState({
+          blogList: res.data.data,
+        })
+      })
+  }
+
+
   render() {
     return (
       <div>
@@ -33,9 +54,9 @@ class BlogCollection extends Component {
             <div className="row card-columns py-lg-5">
               <div className="col-md-4 p-0">
                 <div className="card">
-                  <a href="single.html">
+                  <NavLink to="/blog">
                     <img className="card-img-top" src="images/blg1.jpg" alt="Card image cap" />
-                  </a>
+                  </NavLink>
                   <div className="card-body">
                     <h5 className="card-title blg_w3ls">
                       <NavLink to="/blog">A Selection of T-shirts</NavLink>
@@ -43,6 +64,26 @@ class BlogCollection extends Component {
                     <p className="card-text">It’s wise to prioritize your search with a category, and we have a vibrant selection of Harley vintage t-shirts online. You can scoop up a delightful variety of thrift vintage t-shirts for youth online by keeping a close eye on our line ups.</p>
                   </div>
                 </div>
+                {
+                  this.state.blogList.map(blog => {
+                    return (
+                      <div className="card">
+                        <a href="/blog">
+                          <img className="card-img-top" src={blog.blogImageUrl} alt="Card image cap" />
+                        </a>
+                        <div className="card-body">
+                          <h5 className="card-title blg_w3ls">
+                            <a href="/blog">{blog.blogName}</a>
+                          </h5>
+                          <p className="card-text">{blog.blogDescription}</p>
+                          <p className="card-text">
+                            <small className="text-muted">Last updated 1 mins ago</small>
+                          </p>
+                        </div>
+                      </div>
+                    )
+                  })
+                }
                 <div className="card">
                   <a href="single.html">
                     <img className="card-img-top" src="images/a2.jpg" alt="Card image cap" />

@@ -53,13 +53,13 @@ class Login extends Component {
                 })
                 let token = response.data.accessToken
                 localStorage.setItem('token', token)
+                localStorage.setItem('userId', response.data.data._id);
                 if (response.data.data.role == "Admin") {
                     this.props.history.push("/admin")
                 }
                 else {
                     this.props.history.push('/')
                 }
-
                 console.log("Successfully login")
                 console.log("Your token is: " + token)
             } else {

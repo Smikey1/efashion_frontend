@@ -6,8 +6,8 @@ import Swal from "sweetalert2"
 
 class ProductFragment extends Component {
     state = {
-        myCategory: [],
-        myproducts: [],
+        categoryList: [],
+        productList: [],
         index: 1,
         product_id: "",
         productName: "",
@@ -67,14 +67,13 @@ class ProductFragment extends Component {
             .then((res) => {
                 console.log(res.data.data)
                 this.setState({
-                    myCategory: res.data.data,
+                    categoryList: res.data.data,
                 })
             })
     }
 
     // for choosing image
     changeFileHandler = (e) => {
-        console.log("now i m changing profile picture")
         this.state.filename = e.target.files[0]
         this.updateProductImage()
     }
@@ -84,9 +83,9 @@ class ProductFragment extends Component {
         axios.get("http://localhost:90/product/get")
             .then((res) => {
                 this.setState({
-                    myproducts: res.data.data
+                    productList: res.data.data
                 })
-                console.log(this.state.myproducts)
+                console.log(this.state.productList)
             })
     }
 
@@ -108,7 +107,6 @@ class ProductFragment extends Component {
 
     // update product
     updateProduct = (productId) => {
-
         const updateProductDetails = {
             productName: this.state.productName,
             productPrice: this.state.productPrice,
@@ -135,7 +133,7 @@ class ProductFragment extends Component {
             this.updateProductImage(productId)
         }
     }
-// creating function to upload product Image
+    // creating function to upload product Image
     updateProductImage = (productId) => {
         console.log(this.state.filename)
         const data = new FormData();
@@ -219,7 +217,7 @@ class ProductFragment extends Component {
                                                 <select className="select form-control-lg">
                                                     <option value={1}>Choose Category</option>
                                                     {
-                                                        this.state.myCategory.map((category) => {
+                                                        this.state.categoryList.map((category) => {
                                                             return (
                                                                 <option value={category.categoryName}>{category.categoryName}</option>
                                                             )
@@ -280,7 +278,7 @@ class ProductFragment extends Component {
                                                 <tbody>
                                                     {
 
-                                                        this.state.myproducts.map(product => {
+                                                        this.state.productList.map(product => {
                                                             const indexNum = this.state.index
                                                             this.state.index++
                                                             return (
