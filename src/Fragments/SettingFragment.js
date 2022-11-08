@@ -84,36 +84,21 @@ class SettingFragment extends Component {
         this.updateBlogImage()
     }
 
-    // // function to get user profile
-    // getUserById = async () => {
-    //     try {
-    //         console.log(localStorage.getItem("token"))
-    //         const con = {
-    //             headers: {
-    //                 'authorization': `Bearer ${localStorage.getItem("token")}`
-    //             }
-    //         }
-
-    //         const res = await axios.get("http://localhost:90/user/profile", con)
-
-    //         this.setState({
-
-    //             fullname: res.data.data.fullname,
-    //             username: res.data.data.username,
-    //             email: res.data.data.email,
-    //             address: res.data.data.address,
-    //             phone: res.data.data.phone,
-    //             dob: res.data.data.dob,
-    //             gender: res.data.data.gender,
-    //             role: res.data.data.role,
-    //             profilePicUrl: res.data.data.profilePicUrl
-    //         })
-    //         console.log(res)
-    //     }
-    //     catch (e) {
-    //         console.error(e)
-    //     }
-    // }
+    // function to get blog by id
+    getBlogById = async (blogId) => {
+        this.state.blog_id = blogId
+        try {
+            const res = await axios.get("http://localhost:90/blog/getById/" + blogId)
+            this.setState({
+                blogName: res.data.data.blogName,
+                blogDescription: res.data.data.blogDescription,
+            })
+            console.log(res)
+        }
+        catch (e) {
+            console.error(e)
+        }
+    }
 
     // delete User
     deleteUser = async (userId) => {
